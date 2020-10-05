@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adventure Map", "Adventure Map.csproj", "{F5BEA9D9-02F6-4E01-AB23-D5BD98D89B33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5BEA9D9-02F6-4E01-AB23-D5BD98D89B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5BEA9D9-02F6-4E01-AB23-D5BD98D89B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5BEA9D9-02F6-4E01-AB23-D5BD98D89B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5BEA9D9-02F6-4E01-AB23-D5BD98D89B33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A940AE0-F137-45FE-8B4D-46B1BD1597A3}
+	EndGlobalSection
+EndGlobal

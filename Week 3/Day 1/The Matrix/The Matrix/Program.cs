@@ -35,7 +35,7 @@ namespace The_Matrix
                 if (random.Next(3) == 0)
                 {
 
-                    streams.RemoveAt(random.Next(streams.Count));
+                    streams.RemoveAt(random.Next(5));
                 }
                 if (random.Next(3) == 0)
                 {
