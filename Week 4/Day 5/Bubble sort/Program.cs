@@ -34,8 +34,7 @@ namespace Bubble_sort
                     if (data[i + 1] < data[i])
                     {
                         // It is smaller! We need to switch them.
-                        data[i + 1] = data[i];
-                        data[i] = data[i + 1];
+                        (data[i + 1], data[i]) = (data[i], data[i + 1]);
                     }
 
                     // Display data for diagnostic purposes.
