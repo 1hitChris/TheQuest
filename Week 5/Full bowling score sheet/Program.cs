@@ -39,9 +39,18 @@ namespace Full_bowling_score_sheet
                         Console.WriteLine($"FRAME {n + 1}");
                         Console.WriteLine($"First roll: -");
                         jaggedArray[n][1] = roll2;
-                        Console.WriteLine($"Second roll : {jaggedArray[n][k + 1]}");
-                        Console.WriteLine($"Knocked down pins: {sumOfRolls}");
-                        Console.WriteLine();
+                        if (roll2 == 0)
+                        {
+                            Console.WriteLine($"Second roll : -");
+                            Console.WriteLine($"Knocked down pins: {sumOfRolls}");
+                            Console.WriteLine();
+                        }
+                        else if (roll2 > 0)
+                        {
+                            Console.WriteLine($"Second roll : {jaggedArray[n][k + 1]}");
+                            Console.WriteLine($"Knocked down pins: {sumOfRolls}");
+                            Console.WriteLine();
+                        }
                     }
                     else if (roll2 == 0)
                     {
