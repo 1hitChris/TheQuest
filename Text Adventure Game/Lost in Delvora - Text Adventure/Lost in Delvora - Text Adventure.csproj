@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Lost_in_Delvora___Text_Adventure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Level Data.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Level Data.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

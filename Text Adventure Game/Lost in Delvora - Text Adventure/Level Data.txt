@@ -1,0 +1,39 @@
+﻿House
+Name: House
+Description: You're in a small rundown house.
+
+HouseEntrance
+Name: House Entrance
+Description: 
+
+Well
+Name: Well
+Description: 
+
+Field
+Name: Field
+Description: 
+
+Barn
+Name: Barn
+Description: 
+
+ToolShack
+Name: Tool Shack
+Description: 
+
+Greenhouse
+Name: House
+Description: 
+
+Elevator Shaft
+Name: Elevator Shaft
+Description: 
+
+Campfire
+Name: Campfire
+Description: 
+
+Mine
+Name: Mine
+Description: 
