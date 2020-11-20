@@ -1,39 +1,70 @@
 ﻿House
 Name: House
 Description: You're in a small rundown house.
+Directions:
+North: HouseEntrance
+East: Campfire
 
 HouseEntrance
 Name: House Entrance
-Description: 
+Description: You're standing in front of the small house and you can see just how big the farm is.
+Directions:
+North: Well
+East: ToolShack
+NorthWest: ElevatorShaft
 
 Well
 Name: Well
-Description: 
+Description: You stand at the middle of the farm where there's a big well.
+Directions:
+North: Field
+South: HouseEntrance
+East: Barn
+NorthWest: Greenhouse
+SouthEast: ToolShack
+SouthWest: ElevatorShaft
 
 Field
 Name: Field
-Description: 
+Description: You're in a big wheat field.
+Directions:
+South: Well
 
 Barn
 Name: Barn
-Description: 
+Description: You're in a normal looking barn. Got some cows and chickens.
+Directions:
+West: Well
 
 ToolShack
 Name: Tool Shack
-Description: 
+Description: You're at a little hut with various tools in it.
+Directions:
+NorthWest: Well
+West: HouseEntrance
 
 Greenhouse
 Name: House
-Description: 
+Description: You're at a small greenhouse with some withered crops and tools for gardening.
+Directions:
+SouthEast: Well
 
-Elevator Shaft
+ElevatorShaft
 Name: Elevator Shaft
-Description: 
+Description: You're at a small elevator that leads down to the Mines.
+Directions:
+East: Well
+South: Mines
 
 Campfire
 Name: Campfire
-Description: 
+Description: You see a small campfire, probably used for family bbq's.
+Directions:
+West: House
 
-Mine
-Name: Mine
-Description: 
+Mines
+Name: Mines
+Description: Just a couple of big tunnels.
+Directions:
+North: ElevatorShaft
+

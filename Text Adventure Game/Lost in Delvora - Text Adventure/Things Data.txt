@@ -1,0 +1,54 @@
+﻿Knife
+Name: Knife
+Description: A small sharp knife, used for cutting ropes and other thing fabrics.
+StartingLocation: House
+
+FireStarter
+Name: Fire Starter
+Description: Just two pieces of flint. Hit them against each other to create sparks. Not really rocket science here.
+StartingLocation: Nowhere
+
+Key
+Name: Key
+Description: An old rusted key. Better be careful when using it.
+StartingLocation: Mines
+
+Chest
+Name: Chest
+Description: A wooden chest that contains the Tiara
+StartingLocation: Mines
+
+Tiara
+Name: Tiara
+Description: A beautiful tiara clad in silver and gemstones.
+StartingLocation: Nowhere
+
+Pickaxe
+Name: Pickaxe
+Description: A dusty pickaxe used by the miners.
+StartingLocation: Mines
+
+GoldDeposit
+Name: Gold Deposit
+Description: A big boulder with gold ore in it.
+StartingLocation: Mines
+
+GoldOre
+Name: Gold Ore
+Description: A big chunk of pure gold
+StartingLocation: Nowhere
+
+Dynamite
+Name: Dynamite
+Description: A stick of dynamite. Can it still be used? Who knows.
+StartingLocation: Mines
+
+Lunera
+Name: Lunera
+Description: A woman with long black hair and a scrawny body.
+StartingLocation: House
+
+Papa
+Name: Papa
+Description: A tall man with a very muscular build.
+StartingLocation: House

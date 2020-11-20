@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Lost_in_Delvora___Text_Adventure
 {
-    enum LocationID
+    enum LocationId
     {
         Nowhere,
         Inventory,
@@ -18,14 +19,47 @@ namespace Lost_in_Delvora___Text_Adventure
         Field,
         Greenhouse,
         ElevatorShaft,
-        Mine,
+        Mines,
         Campfire
+    }
+
+    enum ThingsId
+    {
+        Knife,
+        FireStarter,
+        Key,
+        Chest,
+        Tiara,
+        Pickaxe,
+        GoldDeposit,
+        GoldOre,
+        Dynamite
+    }
+
+    enum Direction
+    {
+        North,
+        South,
+        West,
+        East,
+        NorthWest,
+        NorthEast,
+        SouthWest,
+        SouthEast,
     }
     class LocationData
     {
-        public LocationID ID;
+        public LocationId ID;
         public string Name;
         public string Description;
+        public Dictionary<Direction, LocationId> Directions;
+    }
+    class ThingData
+    {
+        public ThingsId ID;
+        public string Name;
+        public string Description;
+        public LocationId StartingLocationId;
     }
 
     class Program
@@ -35,61 +69,128 @@ namespace Lost_in_Delvora___Text_Adventure
         const int PrintPauseMilliseconds = 20;
 
         // Data dictionaries
-        static Dictionary<LocationID, LocationData> LocationsData = new Dictionary<LocationID, LocationData>();
+        static Dictionary<LocationId, LocationData> LocationsData = new Dictionary<LocationId, LocationData>();
+        static Dictionary<ThingsId, ThingData> ThingsData = new Dictionary<ThingsId, ThingData>();
 
         // Current state
-        static LocationID CurrentLocationID = LocationID.House;
-
+        static LocationId CurrentLocationId = LocationId.House;
+        static Dictionary<ThingsId, LocationId> ThingsLocations = new Dictionary<ThingsId, LocationId>();
 
         static void Main(string[] args)
         {
             Initialization();
+            InitializeThingsState();
             Console.ForegroundColor = NarrativeColor;
-            Intro();
+            //Intro();
+            DisplayLocation();
+            while (true)
+            {
+                HandlePlayerAction();
+            }
+            
         }
         static void Initialization()
         {
-            string idText;
-            LocationID id;
-
-            string name;
-            string description;
-
             string[] dataFileLines = File.ReadAllLines("Level Data.txt");
-            
-            idText = dataFileLines[0];
-            id = Enum.Parse<LocationID>(idText);
+            string[] thingsDataFileLines = File.ReadAllLines("Things Data.txt");
 
-            name = dataFileLines[1].Substring(6);
-            description = dataFileLines[2].Substring(12);
-                       
-            var houseData = new LocationData();
-            houseData.ID = id;
-            houseData.Name = name;
-            houseData.Description = description;
-
-
-
-            houseData = new LocationData
+            int currentLocationStart = 0;
+            while (currentLocationStart < dataFileLines.Length)
             {
-                ID = Enum.Parse<LocationID>(dataFileLines[0]),
-                Name = dataFileLines[1].Substring(6),
-                Description = dataFileLines[2].Substring(12),
-            };
+                LocationId id;
+                string name;
+                string description;
+                var directions = new Dictionary<Direction, LocationId>();
+                string idText = dataFileLines[currentLocationStart];
 
-            LocationsData[houseData.ID] = houseData;
+                id = Enum.Parse<LocationId>(idText);
+                name = dataFileLines[currentLocationStart + 1].Substring(6);
+                description = dataFileLines[currentLocationStart + 2].Substring(12);
+
+                // Read lines from dataFileLines[4] onwards until reaching an empty line (= while not reaching an empty line).
+                int currentLineIndex = currentLocationStart + 4;
+
+                while (dataFileLines[currentLineIndex] != "")
+                {
+                    // For each line, parse the direction and parse the location ID.
+                    string currentDataLine = dataFileLines[currentLineIndex];
+                    string[] currentDataLineParts = currentDataLine.Split(": ");
+
+                    string directionText = currentDataLineParts[0];
+                    string locationIdText = currentDataLineParts[1];
+
+                    Direction direction = Enum.Parse<Direction>(directionText);
+                    LocationId locationId = Enum.Parse<LocationId>(locationIdText);
+
+                    // When parsed, add it to the dictionary.
+                    directions.Add(direction, locationId);
+
+                    currentLineIndex++;
+                }
+
+                var locationData = new LocationData
+                {
+                    ID = id,
+                    Name = name,
+                    Description = description,
+                    Directions = directions
+                };
+
+                LocationsData[locationData.ID] = locationData;
+
+                currentLocationStart = currentLineIndex + 1;
+            }
+
+            while (currentLocationStart < thingsDataFileLines.Length)
+            {
+                ThingsId id;
+                string name;
+                string description;
+                string idText = thingsDataFileLines[currentLocationStart];
+
+                id = Enum.Parse<ThingsId>(idText);
+                name = thingsDataFileLines[currentLocationStart + 1].Substring(6);
+                description = thingsDataFileLines[currentLocationStart + 2].Substring(12);
+
+                // Read lines from dataFileLines[4] onwards until reaching an empty line (= while not reaching an empty line).
+                int currentLineIndex = currentLocationStart + 4;
+
+                while (thingsDataFileLines[currentLineIndex] != "")
+                {
+                    // For each line, parse the direction and parse the location ID.
+                    string currentDataLine = thingsDataFileLines[currentLineIndex];
+                    string[] currentDataLineParts = currentDataLine.Split(": ");
+                    string thingsIdText = currentDataLineParts[1];
+                    ThingsId thingsId = Enum.Parse<ThingsId>(thingsIdText);
+                    currentLineIndex++;
+                }
+
+                var thingsData = new ThingData
+                {
+                    ID = id,
+                    Name = name,
+                    Description = description,
+                };
+
+                ThingsData[thingsData.ID] = thingsData;
+
+                currentLocationStart = currentLineIndex + 1;
+            }
 
         }
+        static void InitializeThingsState()
+        {
+            // Set all things to their starting locations.
+            foreach (KeyValuePair<ThingsId, ThingData> thingEntry in ThingsData)
+            {
+                ThingsLocations[thingEntry.Key] = thingEntry.Value.StartingLocationId;
+            }
+        }
+
         static void Intro()
         {
             Console.SetWindowSize(137, 50);
-            Console.WriteLine("##::::::::'#######:::'######::'########::::'####:'##::: ##::::'########::'########:'##:::::::'##::::'##::'#######::'########:::::'###::::");
-            Console.WriteLine("##:::::::'##.... ##:'##... ##:... ##..:::::. ##:: ###:: ##:::: ##.... ##: ##.....:: ##::::::: ##:::: ##:'##.... ##: ##.... ##:::'## ##:::");
-            Console.WriteLine("##::::::: ##:::: ##: ##:::..::::: ##:::::::: ##:: ####: ##:::: ##:::: ##: ##::::::: ##::::::: ##:::: ##: ##:::: ##: ##:::: ##::'##:. ##::");
-            Console.WriteLine("##::::::: ##:::: ##:. ######::::: ##:::::::: ##:: ## ## ##:::: ##:::: ##: ######::: ##::::::: ##:::: ##: ##:::: ##: ########::'##:::. ##:");
-            Console.WriteLine("##::::::: ##:::: ##::..... ##:::: ##:::::::: ##:: ##. ####:::: ##:::: ##: ##...:::: ##:::::::. ##:: ##:: ##:::: ##: ##.. ##::: #########:");
-            Console.WriteLine("##::::::: ##:::: ##:'##::: ##:::: ##:::::::: ##:: ##:. ###:::: ##:::: ##: ##::::::: ##::::::::. ## ##::: ##:::: ##: ##::. ##:: ##.... ##:");
-            Console.WriteLine("########:. #######::. ######::::: ##:::::::'####: ##::. ##:::: ########:: ########: ########:::. ###::::. #######:: ##:::. ##: ##:::: ##:");
+            Console.WriteLine(File.ReadAllText("Intro logo.txt"));
             Console.ReadKey();
             Console.Clear();
             bool canHear = false;
@@ -144,8 +245,7 @@ namespace Lost_in_Delvora___Text_Adventure
 
             }
         }
-
-        /*static void HandlePlayerAction()
+        static void HandlePlayerAction()
         {
             // Ask the player what they want to do.
             Print("What now?");
@@ -164,42 +264,42 @@ namespace Lost_in_Delvora___Text_Adventure
             {
                 case "north":
                 case "n":
-                    //TODO
+                    HandleMovement(Direction.North);
                     break;
 
                 case "northeast":
                 case "ne":
-                    //TODO
+                    HandleMovement(Direction.NorthEast);
                     break;
 
                 case "northwest":
                 case "nw":
-                    //TODO
+                    HandleMovement(Direction.NorthWest);
                     break;
 
                 case "west":
                 case "w":
-                    //TODO
+                    HandleMovement(Direction.West);
                     break;
 
                 case "southwest":
                 case "sw":
-                    //TODO
+                    HandleMovement(Direction.SouthWest);
                     break;
 
                 case "south":
                 case "s":
-                    //TODO
+                    HandleMovement(Direction.South);
                     break;
 
                 case "southeast":
                 case "se":
-                    //TODO
+                    HandleMovement(Direction.SouthEast);
                     break;
 
                 case "east":
                 case "e":
-                    //TODO
+                    HandleMovement(Direction.East);
                     break;
 
                 case "pick up":
@@ -235,23 +335,46 @@ namespace Lost_in_Delvora___Text_Adventure
                 case "end":
                 case "quit":
                 case "exit":
-                    Reply("Goodbye!");
-                    ShouldQuit = true;
+                   // Reply("Goodbye!");
+                   // ShouldQuit = true;
                     break;
 
                 default:
-                    Reply("I do not understand you.");
+                   // Reply("I do not understand you.");
                     break;
 
             }
-        }*/
+        }
+        static void HandleMovement(Direction direction)
+        {
+            LocationData currentLocationData = LocationsData[CurrentLocationId];
+
+            if (currentLocationData.Directions.ContainsKey(direction))
+            {
+                // Change current location ID to location ID at given direction
+                LocationId newLocationId = currentLocationData.Directions[direction];
+                CurrentLocationId = newLocationId;
+
+                // Display current location
+                DisplayLocation();
+            }
+            else
+            {
+                Console.WriteLine("Movement in this direction is not possible");
+            }
+
+        }
         static void DisplayLocation()
         {
             Console.Clear();
 
-            // Display current location description.
-            //LocationData currentLocationData = LocationsData[CurrentLocation];
-            //Print(currentLocationData.Description);
+            //Display current location description.
+            LocationData currentLocationData = LocationsData[CurrentLocationId];
+            Print(currentLocationData.Description);
+        }
+        static IEnumerable<string> GetNames(IEnumerable<ThingsId> thingIds)
+        {
+            return thingIds.Select(thingId => ThingsData[thingId].Name);
         }
 
     }
