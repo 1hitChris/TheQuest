@@ -80,6 +80,7 @@ namespace Lost_in_Delvora___Text_Adventure
         {
             Initialization();
             InitializeThingsState();
+            Intro();
             Console.ForegroundColor = NarrativeColor;
             //Intro();
             DisplayLocation();
