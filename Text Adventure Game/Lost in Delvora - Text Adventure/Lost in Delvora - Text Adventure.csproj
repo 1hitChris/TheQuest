@@ -7,16 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Intro logo.txt" />
+    <None Remove="IntroLogo.txt" />
+    <None Remove="IntroStory.txt" />
     <None Remove="Level Data.txt" />
+    <None Remove="LuneraFirstDialogue.txt" />
     <None Remove="Things Data.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Intro logo.txt">
+    <Content Include="IntroLogo.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IntroStory.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Level Data.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LuneraFirstDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Things Data.txt">

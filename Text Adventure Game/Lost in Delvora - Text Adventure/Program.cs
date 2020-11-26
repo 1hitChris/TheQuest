@@ -7,6 +7,7 @@ using System.Threading;
 
 namespace Lost_in_Delvora___Text_Adventure
 {
+    #region Data types
     enum LocationId
     {
         Nowhere,
@@ -22,8 +23,7 @@ namespace Lost_in_Delvora___Text_Adventure
         Mines,
         Campfire
     }
-
-    enum ThingsId
+    enum ThingId
     {
         Knife,
         FireStarter,
@@ -33,9 +33,11 @@ namespace Lost_in_Delvora___Text_Adventure
         Pickaxe,
         GoldDeposit,
         GoldOre,
-        Dynamite
+        Dynamite,
+        MemoryFragment,
+        Lunera,
+        Papa
     }
-
     enum Direction
     {
         North,
@@ -47,6 +49,7 @@ namespace Lost_in_Delvora___Text_Adventure
         SouthWest,
         SouthEast,
     }
+
     class LocationData
     {
         public LocationId ID;
@@ -56,40 +59,66 @@ namespace Lost_in_Delvora___Text_Adventure
     }
     class ThingData
     {
-        public ThingsId ID;
+        public ThingId ID;
         public string Name;
         public string Description;
         public LocationId StartingLocationId;
     }
+    #endregion
 
     class Program
     {
+        #region Fields
         const ConsoleColor NarrativeColor = ConsoleColor.Gray;
         const ConsoleColor PromptColor = ConsoleColor.White;
         const int PrintPauseMilliseconds = 20;
+        const int NumberOfFragments = 7;
 
         // Data dictionaries
         static Dictionary<LocationId, LocationData> LocationsData = new Dictionary<LocationId, LocationData>();
-        static Dictionary<ThingsId, ThingData> ThingsData = new Dictionary<ThingsId, ThingData>();
+        static Dictionary<ThingId, ThingData> ThingsData = new Dictionary<ThingId, ThingData>();
 
         // Current state
-        static LocationId CurrentLocationId = LocationId.House;
-        static Dictionary<ThingsId, LocationId> ThingsLocations = new Dictionary<ThingsId, LocationId>();
+        static LocationId CurrentLocationId;
+        static Dictionary<ThingId, LocationId> CurrentThingsLocations = new Dictionary<ThingId, LocationId>();
+        static int NumberOfFragmentsFound;
+        static int talkedToLuneraCount;
 
+        // Thing helpers
+        static Dictionary<string, ThingId> ThingIdsByName = new Dictionary<string, ThingId>() 
+        { 
+            { "knife", ThingId.Knife },
+            { "tiara", ThingId.Tiara },
+            { "pickaxe", ThingId.Pickaxe },
+            { "firestarter", ThingId.FireStarter },
+            { "dynamite", ThingId.Dynamite },
+            { "gold", ThingId.GoldOre },
+            { "ore", ThingId.GoldOre },
+            { "lunera", ThingId.Lunera },
+            { "papa", ThingId.Papa },
+        };
+        static ThingId[] ThingsYouCanGet = { ThingId.Knife, ThingId.Tiara, ThingId.Pickaxe };
+        static ThingId[] ThingsYouCanTalkTo = { ThingId.Papa, ThingId.Lunera };
+
+        // Bool used to end the game
+        static bool quitGame;
+        #endregion
+
+        #region Program Start
         static void Main(string[] args)
         {
-            Initialization();
-            InitializeThingsState();
+            ReadDataFiles();
+            InitializeState();
             Console.ForegroundColor = NarrativeColor;
             Intro();
             DisplayLocation();
-            while (true)
+            while (!quitGame)
             {
                 HandlePlayerAction();
+                ApplyGameRules();
             }
-            
         }
-        static void Initialization()
+        static void ReadDataFiles()
         {
             string[] dataFileLines = File.ReadAllLines("Level Data.txt");
             string[] thingsDataFileLines = File.ReadAllLines("Things Data.txt");
@@ -105,7 +134,7 @@ namespace Lost_in_Delvora___Text_Adventure
 
                 id = Enum.Parse<LocationId>(idText);
                 name = dataFileLines[currentLocationStart + 1].Substring(6);
-                description = dataFileLines[currentLocationStart + 2].Substring(12);
+                description = dataFileLines[currentLocationStart + 2].Substring(13);
 
                 // Read lines from dataFileLines[4] onwards until reaching an empty line (= while not reaching an empty line).
                 int currentLineIndex = currentLocationStart + 4;
@@ -141,56 +170,59 @@ namespace Lost_in_Delvora___Text_Adventure
                 currentLocationStart = currentLineIndex + 1;
             }
 
-            while (currentLocationStart < thingsDataFileLines.Length)
+            int currentThingsStart = 0;
+            while (currentThingsStart < thingsDataFileLines.Length)
             {
-                ThingsId id;
+                ThingId id;
                 string name;
                 string description;
-                string idText = thingsDataFileLines[currentLocationStart];
+                string idText = thingsDataFileLines[currentThingsStart];
+                LocationId startingLocationId;
+                string startingLocationIdText;
 
-                id = Enum.Parse<ThingsId>(idText);
-                name = thingsDataFileLines[currentLocationStart + 1].Substring(6);
-                description = thingsDataFileLines[currentLocationStart + 2].Substring(12);
-
-                // Read lines from dataFileLines[4] onwards until reaching an empty line (= while not reaching an empty line).
-                int currentLineIndex = currentLocationStart + 4;
-
-                while (thingsDataFileLines[currentLineIndex] != "")
-                {
-                    // For each line, parse the direction and parse the location ID.
-                    string currentDataLine = thingsDataFileLines[currentLineIndex];
-                    string[] currentDataLineParts = currentDataLine.Split(": ");
-                    string thingsIdText = currentDataLineParts[1];
-                    ThingsId thingsId = Enum.Parse<ThingsId>(thingsIdText);
-                    currentLineIndex++;
-                }
-
+                id = Enum.Parse<ThingId>(idText);
+                name = thingsDataFileLines[currentThingsStart + 1].Substring(6);
+                description = thingsDataFileLines[currentThingsStart + 2].Substring(13);
+                startingLocationIdText = thingsDataFileLines[currentThingsStart + 3].Substring(18);
+                startingLocationId = Enum.Parse<LocationId>(startingLocationIdText);
+                
                 var thingsData = new ThingData
                 {
                     ID = id,
                     Name = name,
                     Description = description,
+                    StartingLocationId = startingLocationId
                 };
 
                 ThingsData[thingsData.ID] = thingsData;
 
-                currentLocationStart = currentLineIndex + 1;
+                currentThingsStart += 5;
             }
 
         }
-        static void InitializeThingsState()
+        static void InitializeState()
         {
-            // Set all things to their starting locations.
-            foreach (KeyValuePair<ThingsId, ThingData> thingEntry in ThingsData)
-            {
-                ThingsLocations[thingEntry.Key] = thingEntry.Value.StartingLocationId;
-            }
-        }
+            // Set starting location
+            CurrentLocationId = LocationId.House;
 
+            // Set all things to their starting locations.
+            foreach (KeyValuePair<ThingId, ThingData> thingEntry in ThingsData)
+            {
+                CurrentThingsLocations[thingEntry.Key] = thingEntry.Value.StartingLocationId;
+            }
+
+            // Set fragments 
+            NumberOfFragmentsFound = 0;
+
+            // Set event variables
+            talkedToLuneraCount = 0;
+
+            
+        }
         static void Intro()
         {
             Console.SetWindowSize(137, 50);
-            Console.WriteLine(File.ReadAllText("Intro logo.txt"));
+            Console.WriteLine(File.ReadAllText("IntroLogo.txt"));
             Console.ReadKey();
             Console.Clear();
             bool canHear = false;
@@ -222,13 +254,26 @@ namespace Lost_in_Delvora___Text_Adventure
                         break;
                 }
             } while (!canHear);
-           
+
             string playerName = Console.ReadLine();
             Print($"Oh...{playerName}...that's a nice name i guess. Anyway, you need to wake up and find out the truth of what happened.");
             Console.ReadKey();
             Console.Clear();
+            Print(File.ReadAllText("IntroStory.txt"));
+            Console.ReadKey();
         }
-        static void Print(string text)
+        static void ApplyGameRules()
+        {
+            
+        }
+
+    #endregion
+
+        #region Output Helpers
+    /// <summary>
+    /// Writes the specified text to the output.
+    /// </summary>
+    static void Print(string text)
         {
             int maximumLineLength = Console.WindowWidth - 1;
             MatchCollection lineMatches = Regex.Matches(text, @"(.{1," + maximumLineLength + @"})(?:\s|$)");
@@ -245,6 +290,9 @@ namespace Lost_in_Delvora___Text_Adventure
 
             }
         }
+        #endregion
+
+        #region Interaction
         static void HandlePlayerAction()
         {
             // Ask the player what they want to do.
@@ -258,7 +306,14 @@ namespace Lost_in_Delvora___Text_Adventure
             // Analyze the command by assuming the first word is a verb (or similar instruction).
             string[] words = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            string verb = words[0];
+            string verb = "";
+            if (command != "")
+            {
+                verb = words[0];
+            }
+
+            // Getting names of things from the command.
+            List<ThingId> thingIdsFromCommand = GetThingIdsFromWords(words);
 
             switch (verb)
             {
@@ -302,24 +357,25 @@ namespace Lost_in_Delvora___Text_Adventure
                     HandleMovement(Direction.East);
                     break;
 
-                case "pick up":
+                //Verbs
+                case "pick":
                 case "p":
-                    //TODO
+                    HandleGet(thingIdsFromCommand);
                     break;
 
+                case "look":
                 case "inspect":
-                case "ins":
-                    //TODO
+                    HandleLook(thingIdsFromCommand);
                     break;
 
                 case "inventory":
                 case "i":
-                    //TODO
+                    HandleInventory();
                     break;
 
                 case "talk":
                 case "t":
-                    //TODO
+                    HandleTalk(thingIdsFromCommand);
                     break;
 
                 case "use":
@@ -335,12 +391,14 @@ namespace Lost_in_Delvora___Text_Adventure
                 case "end":
                 case "quit":
                 case "exit":
-                   // Reply("Goodbye!");
-                   // ShouldQuit = true;
+                    {
+                        Print("Thanks for playing!");
+                        quitGame = true;
+                    }
                     break;
 
                 default:
-                   // Reply("I do not understand you.");
+                    Print("I do not understand you.");
                     break;
 
             }
@@ -364,6 +422,144 @@ namespace Lost_in_Delvora___Text_Adventure
             }
 
         }
+        static void HandleGet(List<ThingId> thingIds)
+        {
+            // Check that we have a thing
+            if (thingIds.Count == 0)
+            {
+                Print("Try again");
+                return;
+            }
+
+            // First thing to be picked up
+            ThingId thingToBePicked = thingIds[0];
+            // Get name of thing
+            string thingName = GetThingName(thingToBePicked);
+
+            // Check if we have thing
+            if (HaveThing(thingToBePicked))
+            {
+                Print($"{thingName} is already in your possession.");
+                return;
+            }
+
+            // Make sure the thing is at this location.
+            if (!ThingIsAtCurrentLocation(thingToBePicked))
+            {
+                Print($"{thingName} is not here.");
+                return;
+            }
+
+            // Checks if thing can be picked up
+            if (!ThingsYouCanGet.Contains(thingToBePicked))
+            {
+                Print($"You can't pick up {thingName}");
+                return;
+            }
+            // Everything seems to be OK, take the thing.
+            GetThing(thingToBePicked);
+
+
+        }
+        static void HandleLook(List<ThingId> thingIds)
+        {
+            ThingId thingToBeLooked = thingIds[0];
+            string thingName = GetThingName(thingToBeLooked);
+
+            // Make sure the thing is at this location.
+            if (ThingAvailable(thingToBeLooked))
+            {
+                Print(ThingsData[thingToBeLooked].Description);
+            }
+            else
+            {
+                Print($"{thingName} is not here.");
+            }
+        }
+        static void HandleTalk(List<ThingId> thingIds)
+        {
+            // Check that we have a thing
+            if (thingIds.Count == 0)
+            {
+                Print("");
+                return;
+            }
+            // First thing to be talked to
+            ThingId thingToBeTalkedTo = thingIds[0];
+            // Get name of thing
+            string thingName = GetThingName(thingToBeTalkedTo);
+
+            if (!ThingsYouCanTalkTo.Contains(thingToBeTalkedTo))
+            {
+                Print("You can't talk to that.");
+                return;
+            }
+
+            // Make sure the NPC is present.
+            if (!ThingIsAtCurrentLocation(thingToBeTalkedTo))
+            {
+                Print($"{thingName} is not here.");
+                return;
+            }
+
+            // Everything seems to be OK, proceed to the talk event with the specific NPC.
+            switch (thingToBeTalkedTo)
+            {
+                case ThingId.Lunera:
+                    TalkToLunera();
+                    break;
+
+                case ThingId.Papa:
+                    TalkToPapa();
+                    break;
+            }
+
+        }
+        static void HandleInventory()
+        {
+            // Go through all the things and find the ones that have inventory as location.
+            foreach (KeyValuePair<ThingId, LocationId> item in CurrentThingsLocations)
+            {
+                if (item.Value == LocationId.Inventory)
+                {
+                    Print(GetThingName(item.Key));
+                }
+            }
+        }
+        #endregion
+
+        #region Interaction Helpers
+        static List<ThingId> GetThingIdsFromWords(string[] words)
+        {
+            var thingIds = new List<ThingId>();
+
+            foreach (string word in words)
+            {
+                if (ThingIdsByName.ContainsKey(word))
+                {
+                    thingIds.Add(ThingIdsByName[word]);
+                }
+            }
+
+            return thingIds;
+        }
+        static IEnumerable<ThingId> GetThingsAtLocation(LocationId locationId)
+        {
+            // Returns all the ThingIds for things at the given location.
+            return CurrentThingsLocations.Keys.Where(thingId => CurrentThingsLocations[thingId] == locationId);
+        }
+        static string GetName(ThingId thingId)
+        {
+            // Returns the name of a thing.
+            return ThingsData[thingId].Name;
+        }
+        static IEnumerable<string> GetNames(IEnumerable<ThingId> thingIds)
+        {
+            return thingIds.Select(thingId => ThingsData[thingId].Name);
+        }
+        #endregion
+
+        #region Display Helpers
         static void DisplayLocation()
         {
             Console.Clear();
@@ -372,10 +568,82 @@ namespace Lost_in_Delvora___Text_Adventure
             LocationData currentLocationData = LocationsData[CurrentLocationId];
             Print(currentLocationData.Description);
         }
-        static IEnumerable<string> GetNames(IEnumerable<ThingsId> thingIds)
+        static void DisplayThing(ThingId thing)
         {
-            return thingIds.Select(thingId => ThingsData[thingId].Name);
+            Console.Clear();
+
+            //Display Thing data
+            ThingData currentThingData = ThingsData[thing];
+            Print(currentThingData.Description);
+        }
+        static void DisplayInventory()
+        {
+
+        }
+        static string GetThingName(ThingId thingId)
+        {
+            return ThingsData[thingId].Name;
+        }
+
+
+        #endregion
+
+        #region Event Helpers
+        static bool ThingAt(ThingId thingId, LocationId locationId)
+        {
+            LocationId currentLocationOfThing = CurrentThingsLocations[thingId];
+            return currentLocationOfThing == locationId;
+        }
+        static bool ThingIsAtCurrentLocation(ThingId thingId)
+        {
+            return ThingAt(thingId, CurrentLocationId);
+        }
+        static bool ThingAvailable(ThingId thingId)
+        {
+            return ThingIsAtCurrentLocation(thingId) || HaveThing(thingId);
+        }
+        static bool HaveThing(ThingId thingId)
+        {
+           return ThingAt(thingId, LocationId.Inventory);
+        }
+        static void MoveThing(ThingId thingId, LocationId locationId)
+        {
+            CurrentThingsLocations[thingId] = locationId;
+        }
+        static void GetThing(ThingId thingId)
+        {
+            MoveThing(thingId, LocationId.Inventory);
+        }
+        static void DropThing(ThingId thingId)
+        {
+            MoveThing(thingId, CurrentLocationId);
+        }
+        
+        #endregion
+
+        #region NPC Interactions
+        static void TalkToLunera()
+        {
+            if (talkedToLuneraCount > 0)
+            {
+                // Dialogue number 2
+            }
+            else
+            {
+                Console.Clear();
+                string dialogue1 = File.ReadAllText("LuneraFirstDialogue.txt");
+                // Dialogue number 1
+                Print(dialogue1);
+                talkedToLuneraCount++;
+            }
+        }
+
+        static void TalkToPapa()
+        {
+
         }
 
     }
+    #endregion
+
 }

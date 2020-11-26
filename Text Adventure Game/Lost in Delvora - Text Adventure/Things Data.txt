@@ -43,6 +43,11 @@ Name: Dynamite
 Description: A stick of dynamite. Can it still be used? Who knows.
 StartingLocation: Mines
 
+MemoryFragment
+Name: Memory Fragment
+Description: Looks like an ordinary piece of glass
+StartingLocation: Nowhere
+
 Lunera
 Name: Lunera
 Description: A woman with long black hair and a scrawny body.
