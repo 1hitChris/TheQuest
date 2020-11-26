@@ -21,6 +21,7 @@ namespace Full_bowling_score_sheet
                 rolls[i] = new int[2];
             }
 
+            // Calculating the rolls
             for (int frameIndex = 0; frameIndex < 10; frameIndex++)
             {
                 if (frameIndex == 9)
@@ -67,6 +68,7 @@ namespace Full_bowling_score_sheet
                 }
             }
 
+            // Writing out the results
             for (int frameIndex = 0; frameIndex < 10; frameIndex++)
             {
 
@@ -114,7 +116,7 @@ namespace Full_bowling_score_sheet
 
                 }
             }
-
+            // Writing out the results for last frame
             for (int frameIndex = 0; frameIndex < 10; frameIndex++)
             {
                 int[] currentFrameRolls = rolls[frameIndex];
@@ -139,7 +141,7 @@ namespace Full_bowling_score_sheet
                         else if (roll2 == 10)
                         {
                             Console.WriteLine("Second roll: /");
-                            
+
                             int roll3 = currentFrameRolls[2];
                             if (roll3 == 0)
                             {
@@ -250,7 +252,7 @@ namespace Full_bowling_score_sheet
                         }
                     }
                 }
-                
+
                 // Frame 1 - 9
                 else
                 {
@@ -284,14 +286,14 @@ namespace Full_bowling_score_sheet
                     else
                     {
                         Console.WriteLine($"First roll: {roll1}");
-                        
+
                         if (roll2 == 0)
                         {
                             Console.WriteLine("Second roll: -");
                         }
                         else if (roll1 + roll2 == 10)
                         {
-                            Console.WriteLine("Second roll: /");     
+                            Console.WriteLine("Second roll: /");
                         }
                         else
                         {
@@ -315,8 +317,55 @@ namespace Full_bowling_score_sheet
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"Frame score: {frameScore[frameIndex]}");
                     Console.WriteLine();
-                }    
+                }
             }
+
+            DrawScoreboard();
+        }
+        static void DrawScoreboard()
+        {
+            // Draw top border
+            Console.Write("┌─┬─┬─");
+            for (int frameIndex = 1; frameIndex < 10; frameIndex++)
+            {
+                Console.Write("┬─┬─┬─");
+                if (frameIndex == 9) Console.Write("┬─");
+            }
+            Console.WriteLine("┐");
+
+            //Draw middle with score
+            Console.Write("|");
+            for (int frameIndex = 1; frameIndex < 10; frameIndex++)
+            {
+                Console.Write(" | | |");
+                if (frameIndex == 9) Console.Write(" │ │ │ ");
+            }
+            Console.WriteLine("|");
+
+            Console.Write("|");
+            for (int frameIndex = 1; frameIndex < 10; frameIndex++)
+            {
+                Console.Write(" └─┴─┤");
+                if (frameIndex == 9) Console.Write(" └─┴─┴");
+            }
+            Console.WriteLine("─┤");
+
+            Console.Write("│");
+            for (int frameIndex = 1; frameIndex < 10; frameIndex++)
+            {
+                Console.Write("     |");
+                if (frameIndex == 9) Console.Write("       ");
+            }
+            Console.WriteLine("|");
+
+            // Draw bottom border
+            Console.Write("└─────");
+            for (int frameIndex = 1; frameIndex < 10; frameIndex++)
+            {
+                Console.Write("┴─────");
+                if (frameIndex == 9) Console.Write("──");
+            }
+            Console.WriteLine("┘");
         }
     }
 }
