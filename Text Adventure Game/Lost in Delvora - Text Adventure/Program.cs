@@ -22,7 +22,9 @@ namespace Lost_in_Delvora___Text_Adventure
         Greenhouse,
         ElevatorShaft,
         Mines,
-        Campfire
+        Campfire,
+        LeftTunnel,
+        RightTunnel,
     }
     enum ThingId
     {
@@ -49,6 +51,11 @@ namespace Lost_in_Delvora___Text_Adventure
         NorthEast,
         SouthWest,
         SouthEast,
+        Down,
+        Up,
+        Left,
+        Right,
+        Back,
     }
 
     class LocationData
@@ -94,10 +101,14 @@ namespace Lost_in_Delvora___Text_Adventure
             { "dynamite", ThingId.Dynamite },
             { "gold", ThingId.GoldOre },
             { "ore", ThingId.GoldOre },
+            { "key", ThingId.Key },
+            { "golddeposit", ThingId.GoldDeposit },
+            { "gold deposit", ThingId.GoldDeposit },
+            { "deposit", ThingId.GoldDeposit },
             { "lunera", ThingId.Lunera },
             { "papa", ThingId.Papa },
         };
-        static ThingId[] ThingsYouCanGet = { ThingId.Knife, ThingId.Tiara, ThingId.Pickaxe };
+        static ThingId[] ThingsYouCanGet = { ThingId.Knife, ThingId.Tiara, ThingId.Pickaxe, ThingId.Dynamite, ThingId.GoldOre, ThingId.Key };
         static ThingId[] ThingsYouCanTalkTo = { ThingId.Papa, ThingId.Lunera };
 
         // Bool used to end the game
@@ -110,7 +121,7 @@ namespace Lost_in_Delvora___Text_Adventure
             ReadDataFiles();
             InitializeState();
             Console.ForegroundColor = NarrativeColor;
-            Intro();
+            //Intro();
             DisplayLocation();
             while (!quitGame)
             {
@@ -264,7 +275,14 @@ namespace Lost_in_Delvora___Text_Adventure
         }
         static void ApplyGameRules()
         {
-            
+            if (NumberOfFragmentsFound < NumberOfFragments)
+            {
+                return;
+            }
+            else
+            {
+                quitGame = true;
+            }
         }
 
     #endregion
@@ -355,6 +373,26 @@ namespace Lost_in_Delvora___Text_Adventure
                 case "east":
                 case "e":
                     HandleMovement(Direction.East);
+                    break;
+
+                case "down":
+                    HandleMovement(Direction.Down);
+                    break;
+
+                case "up":
+                    HandleMovement(Direction.Up);
+                    break;
+
+                case "left":
+                    HandleMovement(Direction.Left);
+                    break;
+
+                case "right":
+                    HandleMovement(Direction.Right);
+                    break;
+
+                case "back":
+                    HandleMovement(Direction.Back);
                     break;
 
                 //Verbs
@@ -502,6 +540,12 @@ namespace Lost_in_Delvora___Text_Adventure
         }
         static void HandleLook(List<ThingId> thingIds)
         {
+            // Check that we have a thing
+            if (thingIds.Count == 0)
+            {
+                Print("Try again");
+                return;
+            }
             ThingId thingToBeLooked = thingIds[0];
             string thingName = GetThingName(thingToBeLooked);
 
@@ -657,7 +701,6 @@ namespace Lost_in_Delvora___Text_Adventure
         {
             MoveThing(thingId, CurrentLocationId);
         }
-        
         #endregion
 
         #region NPC Interactions
@@ -665,7 +708,10 @@ namespace Lost_in_Delvora___Text_Adventure
         {
             if (talkedToLuneraCount > 0)
             {
+                Console.Clear();
+                string dialogue2 = File.ReadAllText("LuneraSecondDialogue.txt");
                 // Dialogue number 2
+                Print(dialogue2);
             }
             else
             {
@@ -676,13 +722,24 @@ namespace Lost_in_Delvora___Text_Adventure
                 talkedToLuneraCount++;
             }
         }
-
         static void TalkToPapa()
         {
-
+            if (talkedToLuneraCount > 0)
+            {
+                Console.Clear();
+                string dialogue2 = File.ReadAllText("PapaDialogueAfterLunera.txt");
+                // Dialogue number 2
+                Print(dialogue2);
+            }
+            else
+            {
+                Console.Clear();
+                string dialogue1 = File.ReadAllText("PapaFirstDialogue.txt");
+                // Dialogue number 1
+                Print(dialogue1);
+            }
         }
 
     }
     #endregion
-
 }

@@ -11,6 +11,9 @@
     <None Remove="IntroStory.txt" />
     <None Remove="Level Data.txt" />
     <None Remove="LuneraFirstDialogue.txt" />
+    <None Remove="LuneraSecondDialogue.txt" />
+    <None Remove="PapaDialogueAfterLunera.txt" />
+    <None Remove="PapaFirstDialogue.txt" />
     <None Remove="Things Data.txt" />
   </ItemGroup>
 
@@ -25,6 +28,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LuneraFirstDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LuneraSecondDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PapaDialogueAfterLunera.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PapaFirstDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Things Data.txt">

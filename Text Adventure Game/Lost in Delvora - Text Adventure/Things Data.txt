@@ -15,7 +15,7 @@ StartingLocation: Mines
 
 Chest
 Name: Chest
-Description: A wooden chest that contains the Tiara
+Description: A simple wooden chest with a rusted lock.
 StartingLocation: Mines
 
 Tiara
@@ -31,7 +31,7 @@ StartingLocation: Mines
 GoldDeposit
 Name: Gold Deposit
 Description: A big boulder with gold ore in it.
-StartingLocation: Mines
+StartingLocation: RightTunnel
 
 GoldOre
 Name: Gold Ore
@@ -40,7 +40,7 @@ StartingLocation: Nowhere
 
 Dynamite
 Name: Dynamite
-Description: A stick of dynamite. Can it still be used? Who knows.
+Description: Use it to get a triple kill like a badass!
 StartingLocation: Mines
 
 MemoryFragment
