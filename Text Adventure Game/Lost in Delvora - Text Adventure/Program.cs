@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 
+
 namespace Lost_in_Delvora___Text_Adventure
 {
     #region Data types
@@ -65,8 +66,7 @@ namespace Lost_in_Delvora___Text_Adventure
         public LocationId StartingLocationId;
     }
     #endregion
-
-    class Program
+        class Program
     {
         #region Fields
         const ConsoleColor NarrativeColor = ConsoleColor.Gray;
@@ -385,7 +385,7 @@ namespace Lost_in_Delvora___Text_Adventure
 
                 case "drop item":
                 case "d":
-                    //TODO
+                    HandleDrop(thingIdsFromCommand);
                     break;
 
                 case "end":
@@ -458,7 +458,46 @@ namespace Lost_in_Delvora___Text_Adventure
             }
             // Everything seems to be OK, take the thing.
             GetThing(thingToBePicked);
+            Print($"You picked up {thingName}");
 
+
+        }
+        static void HandleDrop(List<ThingId> thingIds)
+        {
+            // Check that we have a thing
+            if (thingIds.Count == 0)
+            {
+                Print("That's not an item");
+                return;
+            }
+
+            // First thing to be picked up
+            ThingId thingToBePicked = thingIds[0];
+            // Get name of thing
+            string thingName = GetThingName(thingToBePicked);
+
+            // Check if we have thing
+            if (HaveThing(thingToBePicked))
+            {
+                Print($"{thingName} is already in your possession.");
+                return;
+            }
+
+            // Make sure the thing is at this location.
+            if (!ThingIsAtCurrentLocation(thingToBePicked))
+            {
+                Print($"{thingName} is not here.");
+                return;
+            }
+
+            // Checks if thing can be picked up
+            if (!ThingsYouCanGet.Contains(thingToBePicked))
+            {
+                Print($"You can't pick up {thingName}");
+                return;
+            }
+            // Everything seems to be OK, take the thing.
+            DropThing(thingToBePicked);
 
         }
         static void HandleLook(List<ThingId> thingIds)
