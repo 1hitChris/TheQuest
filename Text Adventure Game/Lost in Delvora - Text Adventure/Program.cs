@@ -305,7 +305,7 @@ namespace Lost_in_Delvora___Text_Adventure
         static void InitializeState()
         {
             // Set starting location
-            CurrentLocationId = LocationId.Mines;
+            CurrentLocationId = LocationId.House;
 
             // Set all things to their starting locations.
             foreach (KeyValuePair<ThingId, ThingData> thingEntry in ThingsData)
@@ -1088,6 +1088,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 // Dialogue Memory Fragment
                 Print(dialogueGoldFragment);
                 MoveThing(ThingId.GoldOre, LocationId.Nowhere);
+                GetThing(ThingId.LunerasMemoryFragment);
                 NumberOfFragmentsFound++;
                 LuneraGold = true;
                 return;

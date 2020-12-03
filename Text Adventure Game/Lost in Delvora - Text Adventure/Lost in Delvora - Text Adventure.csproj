@@ -28,15 +28,20 @@
     <None Remove="Textfiles\Evalina\EvalinaDollFragment.txt" />
     <None Remove="Textfiles\Evalina\EvalinaDressFragment.txt" />
     <None Remove="Textfiles\Gillhardt\GillhardtJointDialogue.txt" />
+    <None Remove="Textfiles\Gillhardt\GillhardtJointFragment.txt" />
     <None Remove="Textfiles\Gillhardt\GillhardtSecondDialogue.txt" />
     <None Remove="Textfiles\Gillhardt\GillhardtSleepingDialogue.txt" />
     <None Remove="Textfiles\Gustof\GustofBreadDialogue.txt" />
+    <None Remove="Textfiles\Gustof\GustofBreadFragment.txt" />
     <None Remove="Textfiles\Gustof\GustofMeatDialogue.txt" />
+    <None Remove="Textfiles\Gustof\GustofMeatFragment.txt" />
     <None Remove="Textfiles\Gustof\GustofSecondDialogue.txt" />
     <None Remove="Textfiles\Intro\Warning.txt" />
     <None Remove="Textfiles\Papa\PapaLastDialogue.txt" />
     <None Remove="Textfiles\Sloan\SloanBellDialogue.txt" />
+    <None Remove="Textfiles\Sloan\SloanBellFragment.txt" />
     <None Remove="Textfiles\Sloan\SloanExplosionDialogue.txt" />
+    <None Remove="Textfiles\Sloan\SloanExplosionFragment.txt" />
     <None Remove="Textfiles\Wilbert\WilbertDynamiteFragment.txt" />
     <None Remove="Textfiles\Wilbert\WilbertFireFragment.txt" />
     <None Remove="Textfiles\Wilbert\WilbertNoMoreDialogue.txt" />
@@ -75,6 +80,9 @@
     <Content Include="Textfiles\Gillhardt\GillhardtJointDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Textfiles\Gillhardt\GillhardtJointFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textfiles\Gillhardt\GillhardtSecondDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -84,7 +92,13 @@
     <Content Include="Textfiles\Gustof\GustofBreadDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Textfiles\Gustof\GustofBreadFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textfiles\Gustof\GustofMeatDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gustof\GustofMeatFragment.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textfiles\Gustof\GustofSecondDialogue.txt">
@@ -135,10 +149,16 @@
     <Content Include="Textfiles\Sloan\SloanBellDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Textfiles\Sloan\SloanBellFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textfiles\Sloan\SloanExplosionDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textfiles\Sloan\SloanFirstDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Sloan\SloanExplosionFragment.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Textfiles\Wilbert\WilbertDynamiteFragment.txt">
