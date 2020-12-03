@@ -212,7 +212,7 @@ namespace Lost_in_Delvora___Text_Adventure
             ReadDataFiles();
             InitializeState();
             Console.ForegroundColor = NarrativeColor;
-            //Intro();
+            Intro();
             DisplayLocation();
             while (!quitGame)
             {
@@ -410,9 +410,59 @@ namespace Lost_in_Delvora___Text_Adventure
             }
             else
             {
-                string endingStory = File.ReadAllText("endingStory.txt");
+                if (LuneraGold == true)
+                {
+
+                }
+                if (LuneraTiara == true)
+                {
+
+                }
+                if (toolsInWell == true)
+                {
+
+                }
+                if (toolsBurned == true)
+                {
+
+                }
+                if (toolsDestroyed == true)
+                {
+
+                }
+                if (EvalinaDoll == true)
+                {
+
+                }
+                if (EvalinaDress == true)
+                {
+
+                }
+                if (GillhardtJoint == true)
+                {
+
+                }
+                if (GillhardtPotion == true)
+                {
+
+                }
+                if (GustofBread == true)
+                {
+
+                }
+                if (GustofMeat == true)
+                {
+
+                }
+                if (SloanBell == true)
+                {
+
+                }
+                if (toolsDestroyed == true)
+                {
+
+                }
                 string credits = File.ReadAllText("Credits.txt");
-                Print(endingStory);
                 Print(credits);
                 quitGame = true;
             }
@@ -1023,6 +1073,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogueTiaraFragment);
                 GetThing(ThingId.LunerasMemoryFragment);
                 NumberOfFragmentsFound++;
+                LuneraTiara = true;
                 return;
             }
             if (HaveThing(ThingId.GoldOre))
@@ -1038,6 +1089,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogueGoldFragment);
                 MoveThing(ThingId.GoldOre, LocationId.Nowhere);
                 NumberOfFragmentsFound++;
+                LuneraGold = true;
                 return;
             }
             if (HaveThing(ThingId.LunerasMemoryFragment))
@@ -1170,6 +1222,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 MoveThing(ThingId.Doll, LocationId.Nowhere);
                 GetThing(ThingId.EvalinasMemoryFragment);
                 NumberOfFragmentsFound++;
+                EvalinaDoll = true;
                 return;
             }
 
@@ -1182,6 +1235,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 MoveThing(ThingId.Dress, LocationId.Nowhere);
                 GetThing(ThingId.EvalinasMemoryFragment);
                 NumberOfFragmentsFound++;
+                EvalinaDress = true;
                 return;
             }
             if (talkedToEvalinaCount > 0)
@@ -1213,6 +1267,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 MoveThing(ThingId.Joint, LocationId.Nowhere);
                 GetThing(ThingId.GillhardtsMemoryFragment);
                 NumberOfFragmentsFound++;
+                GillhardtJoint = true;
                 return;
             }
 
@@ -1225,6 +1280,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 MoveThing(ThingId.Potion, LocationId.Nowhere);
                 GetThing(ThingId.GillhardtsMemoryFragment);
                 NumberOfFragmentsFound++;
+                GillhardtPotion = true;
                 return;
             }
 
@@ -1257,6 +1313,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 MoveThing(ThingId.Bread, LocationId.Nowhere);
                 GetThing(ThingId.GustofsMemoryFragment);
                 NumberOfFragmentsFound++;
+                GustofBread = true;
                 return;
             }
 
@@ -1269,6 +1326,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 MoveThing(ThingId.CookedMeat, LocationId.Nowhere);
                 GetThing(ThingId.GustofsMemoryFragment);
                 NumberOfFragmentsFound++;
+                GustofMeat = true;
                 return;
             }
 
@@ -1301,6 +1359,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 MoveThing(ThingId.Bell, LocationId.Nowhere);
                 GetThing(ThingId.SloansMemoryFragment);
                 NumberOfFragmentsFound++;
+                SloanBell = true;
                 return;
             }
 
