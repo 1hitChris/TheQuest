@@ -1,0 +1,4 @@
+﻿$4"......"$0 Evalina looks at you without saying anything but you can see that she glances at Lunera through the window.
+$3"Come on, just leave it Evalina. You know Papa won't get us anything. Lunera always gets the new and pretty things."$0 Wilbert pushes Evalina lightly. Even though his method of "helping" his sister seems crude, the sentiment seems to reach her.
+As Evalinas gaze travels from the window to you she utter her first word.
+$4"...pretty thing..."

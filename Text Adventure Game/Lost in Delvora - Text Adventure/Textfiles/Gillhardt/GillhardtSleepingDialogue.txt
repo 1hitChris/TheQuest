@@ -1,0 +1,6 @@
+﻿$0You walk up to Gillhardt while he is rummaging through his bag, panicing like he lost something important.
+$5"Okay that is here...that too...and that...where is...oh there. Good all here."$0 he turns around when he hear you coming closer and quickly pulls the bag close to himself, while not letting his eyes wander away from yours.
+$5"What?"$0 You take out the potion you have created and ask him if he is interested since you made "too much" of it. When he ask what it is, you just tell him that it's a drink that gives you energy.
+$5"Hmm...sure why not."$0 Gillhardt hardly hesitate and opens up the bottle and chugs the whole thing in just a couple of seconds.
+$5"I do not feel any different..."$0 You tell him that it will take a while for it to work and as you wait for the "magic" to happen, it does. Gillhardt seems disoriented and stumbles around and suddenly falls down next to his bag, fast asleep.
+As the bag falls you see some various items fall out but there is one thing that stands out too you and that is a shard of glass and when you try to pick it up, you mind goes blank.

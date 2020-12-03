@@ -7,39 +7,171 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="EvalinaDollDialogue.txt" />
+    <None Remove="EvalinaDressDialogue.txt" />
+    <None Remove="EvalinaFirstDialogue.txt" />
+    <None Remove="EvalinaSecondDialogue.txt" />
+    <None Remove="GillhardtFirstDialogue.txt" />
+    <None Remove="GoldMemoryFragment.txt" />
+    <None Remove="GustofFirstDialogue.txt" />
     <None Remove="IntroLogo.txt" />
     <None Remove="IntroStory.txt" />
+    <None Remove="IntroStoryPart2.txt" />
     <None Remove="Level Data.txt" />
     <None Remove="LuneraFirstDialogue.txt" />
+    <None Remove="LuneraGoldDialogue.txt" />
     <None Remove="LuneraSecondDialogue.txt" />
+    <None Remove="LuneraTiaraDialogue.txt" />
     <None Remove="PapaDialogueAfterLunera.txt" />
     <None Remove="PapaFirstDialogue.txt" />
+    <None Remove="SloanFirstDialogue.txt" />
+    <None Remove="Textfiles\Evalina\EvalinaDollFragment.txt" />
+    <None Remove="Textfiles\Evalina\EvalinaDressFragment.txt" />
+    <None Remove="Textfiles\Gillhardt\GillhardtJointDialogue.txt" />
+    <None Remove="Textfiles\Gillhardt\GillhardtSecondDialogue.txt" />
+    <None Remove="Textfiles\Gillhardt\GillhardtSleepingDialogue.txt" />
+    <None Remove="Textfiles\Gustof\GustofBreadDialogue.txt" />
+    <None Remove="Textfiles\Gustof\GustofMeatDialogue.txt" />
+    <None Remove="Textfiles\Gustof\GustofSecondDialogue.txt" />
+    <None Remove="Textfiles\Intro\Warning.txt" />
+    <None Remove="Textfiles\Papa\PapaLastDialogue.txt" />
+    <None Remove="Textfiles\Sloan\SloanBellDialogue.txt" />
+    <None Remove="Textfiles\Sloan\SloanExplosionDialogue.txt" />
+    <None Remove="Textfiles\Wilbert\WilbertDynamiteFragment.txt" />
+    <None Remove="Textfiles\Wilbert\WilbertFireFragment.txt" />
+    <None Remove="Textfiles\Wilbert\WilbertNoMoreDialogue.txt" />
+    <None Remove="Textfiles\Wilbert\WilbertWellFragment.txt" />
     <None Remove="Things Data.txt" />
+    <None Remove="TiaraMemoryFragment.txt" />
+    <None Remove="WilbertDynamiteDialogue.txt" />
+    <None Remove="WilbertFireDialogue.txt" />
+    <None Remove="WilbertFirstDialogue.txt" />
+    <None Remove="WilbertSecondDialogue.txt" />
+    <None Remove="WilbertWellDialogue.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="IntroLogo.txt">
+    <Content Include="Textfiles\Evalina\EvalinaDollDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="IntroStory.txt">
+    <Content Include="Textfiles\Evalina\EvalinaDollFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Evalina\EvalinaDressDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Evalina\EvalinaDressFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Evalina\EvalinaFirstDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Evalina\EvalinaSecondDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gillhardt\GillhardtFirstDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gillhardt\GillhardtJointDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gillhardt\GillhardtSecondDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gillhardt\GillhardtSleepingDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gustof\GustofBreadDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gustof\GustofMeatDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gustof\GustofSecondDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Intro\Warning.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Lunera\GoldMemoryFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Gustof\GustofFirstDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Intro\IntroLogo.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Intro\IntroStory.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Intro\IntroStoryPart2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Level Data.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LuneraFirstDialogue.txt">
+    <Content Include="Textfiles\Lunera\LuneraFirstDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LuneraSecondDialogue.txt">
+    <Content Include="Textfiles\Lunera\LuneraSecondDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PapaDialogueAfterLunera.txt">
+    <Content Include="Textfiles\Papa\PapaDialogueAfterLunera.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PapaFirstDialogue.txt">
+    <Content Include="Textfiles\Papa\PapaFirstDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Lunera\LuneraTiaraDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Lunera\LuneraGoldDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Papa\PapaLastDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Sloan\SloanBellDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Sloan\SloanExplosionDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Sloan\SloanFirstDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertDynamiteFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertFireFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertNoMoreDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertWellFragment.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Things Data.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Lunera\TiaraMemoryFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertDynamiteDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertFireDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertFirstDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertSecondDialogue.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Wilbert\WilbertWellDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

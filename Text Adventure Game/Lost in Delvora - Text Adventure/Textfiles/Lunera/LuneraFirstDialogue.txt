@@ -1,0 +1,11 @@
+﻿$2"Hi. You might wonder where you are right now and i will tell you eventually, but first i need your help."
+"As you might see, we're not the wealthiest of families, but there is a way to fix that. Unfortunately the fix for the problem lies deep within the mines."
+$0With a quick glance towards the man sitting next to her she then continues, $2"We're not allowed down in the mines for certain reasons, even though this would fix all of our problems..."
+$0The man gives Lunera a stern glance as he put down his cutlery.
+$1"We don't need any help from anyone."$0 mutters the man underneath his big beard.
+Without even listening to the man, Lunera continues, $2"I know this is a lot to ask from a complete stranger"$0 she slowly caress your arm and look at you with a soft smile. Suddenly you are aware of how beautiful she is.
+$2"Would you be so kind as to fetch some treasure from the mines?"$0 With a dumbstruck face you just sit there and stare at Lunera.
+$2"Lovely!"$0 she gets out of her chair and rush over to your side and hugs you. As she hugs you she softly whispers in your ear, $2"I'll give you a great reward if you do this for me".
+$0She smiles at you sits back down in her chair smiling at you.
+When you finally come to your senses you are even more confused than before.
+$2"Oh by the way, it might be dangerous to go alone, so take this!"$0 she hands you two pieces of flint and a small leather bag.

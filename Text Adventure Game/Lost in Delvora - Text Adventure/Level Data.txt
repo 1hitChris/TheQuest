@@ -1,21 +1,22 @@
 ﻿House
 Name: House
-Description: You're in a small rundown house.
+Description: You are in the house with Papa and Lunera. There are some items that catch you eyes, such as a beautiful knife with ivory handle and markings on the blade, a big piece of meat and some thread. Also you have the exit north of you and to the east is a campfire.
 Directions:
 North: HouseEntrance
 East: Campfire
 
 HouseEntrance
 Name: House Entrance
-Description: You're standing in front of the small house and you can see just how big the farm is. North of you, you see a big well, northwest you see an elevator shaft, east there is a tool shack.
+Description: You're standing in front of the small house and you can see just how big the farm is. Just outside of the entrance you can see the twin pair Wilbert and Evalina. North of you, you see a big well, northwest you see an elevator shaft, east there is a tool shack.
 Directions:
 North: Well
 East: ToolShack
 NorthWest: ElevatorShaft
+South: House
 
 Well
 Name: Well
-Description: You stand at the middle of the farm where there's a big well. To the north there is a big field, northwest there is a small greenhouse, east you see a barn, southeast there is a tool shack, southwest you see an elevator shaft, south is the entrance to the house.
+Description: You stand at the middle of the farm where there's a big well. You see Gillhardt fiddeling with a bag next to the well. To the north there is a big field, northwest there is a small greenhouse, east you see a barn, southeast there is a tool shack, southwest you see an elevator shaft, south is the entrance to the house.
 Directions:
 North: Field
 South: HouseEntrance
@@ -32,7 +33,7 @@ South: Well
 
 Barn
 Name: Barn
-Description: You're in a normal looking barn. Got some cows and chickens. To the west there is the well.
+Description: You're in a normal looking barn. Got some cows and chickens, some pieces of cloth hanging around. You also see Gustof sitting next to a sleeping dog. To the west you see the well.
 Directions:
 West: Well
 
@@ -43,17 +44,32 @@ Directions:
 NorthWest: Well
 West: HouseEntrance
 
+BurnedDownToolShack
+Name: Burned down tool shack
+Description: You stand at the now burned down tool shack, where anything useful is now gone.
+Directions:
+NorthWest: Well
+West: HouseEntrance
+
+BlownUpToolShack
+Name: Blown up tool shack
+Description: Where the tool shack once stood, has now been changed into a big crater.
+Directions:
+NorthWest: Well
+West: HouseEntrance
+
 Greenhouse
 Name: House
-Description: You're at a small greenhouse with some withered crops and tools for gardening. To the southeast is the well.
+Description: You're at a small greenhouse with some herbs, tools for gardening, weeds, a white-ish shirt and a book that seems to be about the use of herbs. To the southeast is the well.
 Directions:
 SouthEast: Well
 
 ElevatorShaft
 Name: Elevator Shaft
-Description: You're at a small elevator that leads down to the Mines. To the east is the well.
+Description: You're at a small elevator that leads down to the Mines and above the elevator you see a bell tied up by some rope. To the east is the well and southeast is the entrance to the house.
 Directions:
 East: Well
+SouthEast: HouseEntrance
 Down: Mines
 
 Campfire
@@ -64,21 +80,35 @@ West: House
 
 Mines
 Name: Mines
-Description: Just a couple of big tunnels.
+Description: You're in a big open space that has two different paths to take. Scattered around the room you can see a pickaxe, a rusted key laying on an old worktable next to a stick of dynamite. You can either take the left or the right path.
 Directions:
 Up: ElevatorShaft
 Left: LeftTunnel
 Right: RightTunnel
 
+MinesNoRight
+Name: Mines
+Description: You're in a big open space that has two different paths to take. Scattered around the room you can see a pickaxe, a rusted key laying on an old worktable next to a stick of dynamite. You see that the right path has now been blocked by rubble.
+Directions:
+Up: ElevatorShaft
+Left: LeftTunnel
+
+MinesNoLeft
+Name: Mines
+Description: You're in a big open space that has two different paths to take. Scattered around the room you can see a pickaxe, a rusted key laying on an old worktable next to a stick of dynamite. You see that the left path has now been blocked by rubble.
+Directions:
+Up: ElevatorShaft
+Right: RightTunnel
+
 LeftTunnel
 Name: Left Tunnel
-Description: You walk through the left tunnel and end up in a big room. All you can see is rocks everywhere and one simple wooden chest in the middle of the room.
+Description: You walk through the left tunnel and end up in a big room. All you can see is rocks everywhere and one simple wooden chest in the middle of the room that seems to be locked.
 Directions:
 Back: Mines
 
 RightTunnel
 Name: Right Tunnel
-Description: You walk through the right tunnel, after a while you come to a dead end. You do catch a glimpse of something gold.
+Description: You walk through the right tunnel, after a while you come to a dead end where you also see a gold deposit.
 Directions:
 Back: Mines
 

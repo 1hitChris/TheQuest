@@ -1,10 +1,10 @@
 ﻿Knife
 Name: Knife
-Description: A small sharp knife, used for cutting ropes and other thing fabrics.
+Description: A small sharp knife, used for cutting ropes and other thin fabrics. The handle has a beautiful ivory color and the blade has some markings on it that really stands out.
 StartingLocation: House
 
 FireStarter
-Name: Fire Starter
+Name: Firestarter
 Description: Just two pieces of flint. Hit them against each other to create sparks. Not really rocket science here.
 StartingLocation: Nowhere
 
@@ -16,7 +16,7 @@ StartingLocation: Mines
 Chest
 Name: Chest
 Description: A simple wooden chest with a rusted lock.
-StartingLocation: Mines
+StartingLocation: LeftTunnel
 
 Tiara
 Name: Tiara
@@ -43,9 +43,154 @@ Name: Dynamite
 Description: Use it to get a triple kill like a badass!
 StartingLocation: Mines
 
-MemoryFragment
-Name: Memory Fragment
-Description: Looks like an ordinary piece of glass
+Rope
+Name: Rope
+Description: Simple rope
+StartingLocation: ElevatorShaft
+
+Campfire
+Name: Campfire
+Description: Used for outdoor cooking.
+StartingLocation: Campfire
+
+Well
+Name: Well
+Description: A well filled with water.
+StartingLocation: Well
+
+LitDynamite
+Name: Lit Dynamite
+Description: The dynamite is lit, better use it fast!
+StartingLocation: Nowhere
+
+Dress
+Name: Dress
+Description: I decent looking white dress.
+StartingLocation: Nowhere
+
+Cloth
+Name: Cloth
+Description: A thin, white piece of cloth.
+StartingLocation: Barn
+
+Shirt
+Name: Shirt
+Description: A big white shirt.
+StartingLocation: Greenhouse
+
+Bundle
+Name: Bundle
+Description: A bundle of fiber, wrapped in cloth.
+StartingLocation: Nowhere
+
+Thread
+Name: Thread
+Description: A thin needle made from some sort of animal bone and some black thread.
+StartingLocation: House
+
+Weeds
+Name: Weeds
+Description: Old weeds. Maybe there is some use for them?
+StartingLocation: Greenhouse
+
+Herbs
+Name: Herbs
+Description: Herbs used for medicine.
+StartingLocation: Greenhouse
+
+Book
+Name: Book
+Description: A book about herbs and their uses.
+StartingLocation: Greenhouse
+
+Joint
+Name: Joint
+Description: A "Medicine stick". *wink wink*
+StartingLocation: Nowhere
+
+Potion
+Name: Potion
+Description: This "potion" will put someone to sleep.
+StartingLocation: Nowhere
+
+Wheat
+Name: Wheat
+Description: Wheat used for making bread or used as stuffing in toys, pillows etc.
+StartingLocation: Field
+
+Water
+Name: Water
+Description: Plain water.
+StartingLocation: Well
+
+Doll
+Name: Doll
+Description: A pretty ugly doll. Not even a mother could love.
+StartingLocation: Nowhere
+
+Dough
+Name: Dough
+Description: A ball of dough.
+StartingLocation: Nowhere
+
+Bread
+Name: Bread
+Description: A loaf of bread that's partially burned.
+StartingLocation: Nowhere
+
+Bell
+Name: Bell
+Description: A bell made from brass.
+StartingLocation: ElevatorShaft
+
+Tools
+Name: Tools
+Description: A set of tools for various occasions.
+StartingLocation: ToolShack
+
+Meat
+Name: Meat
+Description: A slab of meat.
+StartingLocation: House
+
+CookedMeat
+Name: Cooked Meat
+Description: Perfectly cooked meat. Even Gordon Ramsey would be impressed.
+StartingLocation: Nowhere
+
+LunerasMemoryFragment
+Name: Lunera's Memory Fragment
+Description: Looks like an ordinary piece of glass.
+StartingLocation: Nowhere
+
+WilbertsMemoryFragment
+Name: Wilbert's Memory Fragment
+Description: Looks like an ordinary piece of glass.
+StartingLocation: Nowhere
+
+EvalinasMemoryFragment
+Name: Evalina's Memory Fragment
+Description: Looks like an ordinary piece of glass.
+StartingLocation: Nowhere
+
+GillhardtsMemoryFragment
+Name: Gillhardt's Memory Fragment
+Description: Looks like an ordinary piece of glass.
+StartingLocation: Nowhere
+
+GustofsMemoryFragment
+Name: Gustof's Memory Fragment
+Description: Looks like an ordinary piece of glass.
+StartingLocation: Nowhere
+
+SloansMemoryFragment
+Name: Sloan's Memory Fragment
+Description: Looks like an ordinary piece of glass.
+StartingLocation: Nowhere
+
+PapasMemoryFragment
+Name: Papa's Memory Fragment
+Description: Looks like an ordinary piece of glass.
 StartingLocation: Nowhere
 
 Lunera
@@ -57,3 +202,29 @@ Papa
 Name: Papa
 Description: A tall man with a very muscular build.
 StartingLocation: House
+
+Wilbert
+Name: Wilbert
+Description: Part 1 of the twin pair.
+StartingLocation: HouseEntrance
+
+Evalina
+Name: Evalina
+Description: Part 2 of the twin pair.
+StartingLocation: HouseEntrance
+
+Gillhardt
+Name: Gillhardt
+Description: 10 year old boy
+StartingLocation: Well
+
+Gustof
+Name: Gustof
+Description: 8 year old boy.
+StartingLocation: Barn
+
+Sloan
+Name: Sloan
+Description: A teenage boy.
+StartingLocation: Field
+

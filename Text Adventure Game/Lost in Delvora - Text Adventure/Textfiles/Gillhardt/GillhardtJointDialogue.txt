@@ -1,0 +1,7 @@
+﻿$0As you walk up to Gillhardt, you take out you "medicine stick". Intrigued by this mysterious item, Gillhardt stops what he's doing and approach you with a steady pace.
+$5"What is that?"$0 clearly interested he's trying to get a closer look of what you're holding, but to no prevail as you put it back into your pocket.
+$5"Come on, let me see."$0 after some consideration you take out the "medicine stick" again and you tell him that it is a medicine that will make you feel really good, like life is the best thing ever.
+You reach out and gesture to Gillhardt that he should take it. Gillhardt looks at you and pans his gaze over to the bag behind him and back to the "medicine stick".
+$5"Fine!"$0 he takes it and looks at it and then over to you.$5 "So what do i do now?"
+$0You tell him that he needs to light one end and inhale the "incense" from the other side of the stick. Sure enough, he fires the stick up and starts inhaling the "incense" and not long after he starts to act a bit weird.
+He starts to fumble around, although he looks really happy and in his uncertain steps he manage to kick his bag and a shard of glass falls out and as you pick it up, your mind goes blank.
