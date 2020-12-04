@@ -408,62 +408,77 @@ namespace Lost_in_Delvora___Text_Adventure
             {
                 return;
             }
-            else
+            else if (NumberOfFragmentsFound == 7)
             {
                 if (LuneraGold == true)
                 {
-
+                    string dialogueGoldFragment = File.ReadAllText("Textfiles/Ending/GoldMemoryFragment.txt");
+                    Print(dialogueGoldFragment);
                 }
                 if (LuneraTiara == true)
                 {
-
+                    string dialogueTiaraFragment = File.ReadAllText("Textfiles/Ending/TiaraMemoryFragment.txt");
+                    Print(dialogueTiaraFragment);
                 }
                 if (toolsInWell == true)
                 {
-
+                    string dialogueWellFragment = File.ReadAllText("Textfiles/Ending/WilbertWellFragment.txt");
+                    Print(dialogueWellFragment);
                 }
                 if (toolsBurned == true)
                 {
-
+                    string dialogueFireFragment = File.ReadAllText("Textfiles/Ending/WilbertFireFragment.txt");
+                    Print(dialogueFireFragment);
                 }
                 if (toolsDestroyed == true)
                 {
-
+                    string dialogueDynamiteFragment = File.ReadAllText("Textfiles/Ending/WilbertDynamiteFragment.txt");
+                    Print(dialogueDynamiteFragment);
                 }
                 if (EvalinaDoll == true)
                 {
-
+                    string dialogueDollFragment = File.ReadAllText("Textfiles/Ending/EvalinaDollFragment.txt");
+                    Print(dialogueDollFragment);
                 }
                 if (EvalinaDress == true)
                 {
-
+                    string dialogueDressFragment = File.ReadAllText("Textfiles/Ending/EvalinaDressFragment.txt");
+                    Print(dialogueDressFragment);
                 }
                 if (GillhardtJoint == true)
                 {
-
+                    string dialogueJointFragment = File.ReadAllText("Textfiles/Ending/GillhardtJointFragment.txt");
+                    Print(dialogueJointFragment);
                 }
                 if (GillhardtPotion == true)
                 {
-
+                    string dialoguePotionFragment = File.ReadAllText("Textfiles/Ending/GillhardtSleepingFragment.txt");
+                    Print(dialoguePotionFragment);
                 }
                 if (GustofBread == true)
                 {
-
+                    string dialogueBreadFragment = File.ReadAllText("Textfiles/Ending/GustofBreadFragment.txt");
+                    Print(dialogueBreadFragment);
                 }
                 if (GustofMeat == true)
                 {
-
+                    string dialogueMeatFragment = File.ReadAllText("Textfiles/Ending/GustofMeatFragment.txt");
+                    Print(dialogueMeatFragment);
                 }
                 if (SloanBell == true)
                 {
-
+                    string dialogueBellFragment = File.ReadAllText("Textfiles/Ending/SloanBellFragment.txt");
+                    Print(dialogueBellFragment);
                 }
                 if (toolsDestroyed == true)
                 {
-
+                    string dialogueExplosionFragment = File.ReadAllText("Textfiles/Ending/SloanExplosionFragment.txt");
+                    Print(dialogueExplosionFragment);
                 }
+                Console.ReadKey();
                 string credits = File.ReadAllText("Credits.txt");
                 Print(credits);
+                Console.ReadKey();
                 quitGame = true;
             }
         }
@@ -1126,6 +1141,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 string dialogue2 = File.ReadAllText("Textfiles/Papa/PapaLastDialogue.txt");
                 // Dialogue number 2
                 Print(dialogue2);
+                NumberOfFragmentsFound++;
                 return;
             }
             if (talkedToLuneraCount > 0)
@@ -1155,6 +1171,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogue2);
                 talkedToWilbertCount++;
                 GetThing(ThingId.WilbertsMemoryFragment);
+                string dialogueWellFragment = File.ReadAllText("Textfiles/Wilbert/WilbertWellFragment.txt");
+                Print(dialogueWellFragment);
                 NumberOfFragmentsFound++;
                 return;
             }
@@ -1167,6 +1185,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogue2);
                 talkedToWilbertCount++;
                 GetThing(ThingId.WilbertsMemoryFragment);
+                string dialogueFireFragment = File.ReadAllText("Textfiles/Wilbert/WilbertFireFragment.txt");
+                Print(dialogueFireFragment);
                 NumberOfFragmentsFound++;
                 return;
             }
@@ -1190,6 +1210,9 @@ namespace Lost_in_Delvora___Text_Adventure
                 string dialogue2 = File.ReadAllText("Textfiles/Wilbert/WilbertDynamiteDialogue.txt");
                 // Dialogue Burned toolshack
                 Print(dialogue2);
+                GetThing(ThingId.WilbertsMemoryFragment);
+                string dialogueDynamiteFragment = File.ReadAllText("Textfiles/Wilbert/WilbertDynamiteFragment.txt");
+                Print(dialogueDynamiteFragment);
                 talkedToWilbertCount++;
                 return;
             }
@@ -1222,6 +1245,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogueDoll);
                 MoveThing(ThingId.Doll, LocationId.Nowhere);
                 GetThing(ThingId.EvalinasMemoryFragment);
+                string dialogueDollFragment = File.ReadAllText("Textfiles/Evalina/EvalinaDollFragment.txt");
+                Print(dialogueDollFragment);
                 NumberOfFragmentsFound++;
                 EvalinaDoll = true;
                 return;
@@ -1235,6 +1260,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogueDress);
                 MoveThing(ThingId.Dress, LocationId.Nowhere);
                 GetThing(ThingId.EvalinasMemoryFragment);
+                string dialogueDressFragment = File.ReadAllText("Textfiles/Evalina/EvalinaDressFragment.txt");
+                Print(dialogueDressFragment);
                 NumberOfFragmentsFound++;
                 EvalinaDress = true;
                 return;
@@ -1267,6 +1294,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogueJoint);
                 MoveThing(ThingId.Joint, LocationId.Nowhere);
                 GetThing(ThingId.GillhardtsMemoryFragment);
+                string dialogueJointFragment = File.ReadAllText("Textfiles/Gillhardt/GillhardtJointFragment.txt");
+                Print(dialogueJointFragment);
                 NumberOfFragmentsFound++;
                 GillhardtJoint = true;
                 return;
@@ -1280,6 +1309,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialoguePotion);
                 MoveThing(ThingId.Potion, LocationId.Nowhere);
                 GetThing(ThingId.GillhardtsMemoryFragment);
+                string dialoguePotionFragment = File.ReadAllText("Textfiles/Gillhardt/GillhardtSleepingFragment.txt");
+                Print(dialoguePotionFragment);
                 NumberOfFragmentsFound++;
                 GillhardtPotion = true;
                 return;
@@ -1313,6 +1344,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogueBread);
                 MoveThing(ThingId.Bread, LocationId.Nowhere);
                 GetThing(ThingId.GustofsMemoryFragment);
+                string dialogueBreadFragment = File.ReadAllText("Textfiles/Gustof/GustofBreadFragment.txt");
+                Print(dialogueBreadFragment);
                 NumberOfFragmentsFound++;
                 GustofBread = true;
                 return;
@@ -1326,6 +1359,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogueMeat);
                 MoveThing(ThingId.CookedMeat, LocationId.Nowhere);
                 GetThing(ThingId.GustofsMemoryFragment);
+                string dialogueMeatFragment = File.ReadAllText("Textfiles/Gustof/GustofMeatFragment.txt");
+                Print(dialogueMeatFragment);
                 NumberOfFragmentsFound++;
                 GustofMeat = true;
                 return;
@@ -1359,6 +1394,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 Print(dialogueBell);
                 MoveThing(ThingId.Bell, LocationId.Nowhere);
                 GetThing(ThingId.SloansMemoryFragment);
+                string dialogueBellFragment = File.ReadAllText("Textfiles/Sloan/SloanBellFragment.txt");
+                Print(dialogueBellFragment);
                 NumberOfFragmentsFound++;
                 SloanBell = true;
                 return;
@@ -1371,6 +1408,8 @@ namespace Lost_in_Delvora___Text_Adventure
                 // Dialogue number 2
                 Print(dialogueBoom);
                 GetThing(ThingId.SloansMemoryFragment);
+                string dialogueExplosionFragment = File.ReadAllText("Textfiles/Sloan/SloanExplosionFragment.txt");
+                Print(dialogueExplosionFragment);
                 NumberOfFragmentsFound++;
                 return;
             }

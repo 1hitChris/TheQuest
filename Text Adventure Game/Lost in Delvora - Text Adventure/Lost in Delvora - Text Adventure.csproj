@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Credits.txt" />
     <None Remove="EvalinaDollDialogue.txt" />
     <None Remove="EvalinaDressDialogue.txt" />
     <None Remove="EvalinaFirstDialogue.txt" />
@@ -25,6 +26,18 @@
     <None Remove="PapaDialogueAfterLunera.txt" />
     <None Remove="PapaFirstDialogue.txt" />
     <None Remove="SloanFirstDialogue.txt" />
+    <None Remove="Textfiles\Ending\EvalinaDollFragment.txt" />
+    <None Remove="Textfiles\Ending\EvalinaDressFragment.txt" />
+    <None Remove="Textfiles\Ending\GillhardtJointFragment.txt" />
+    <None Remove="Textfiles\Ending\GoldMemoryFragment.txt" />
+    <None Remove="Textfiles\Ending\GustofBreadFragment.txt" />
+    <None Remove="Textfiles\Ending\GustofMeatFragment.txt" />
+    <None Remove="Textfiles\Ending\SloanBellFragment.txt" />
+    <None Remove="Textfiles\Ending\SloanExplosionFragment.txt" />
+    <None Remove="Textfiles\Ending\TiaraMemoryFragment.txt" />
+    <None Remove="Textfiles\Ending\WilbertDynamiteFragment.txt" />
+    <None Remove="Textfiles\Ending\WilbertFireFragment.txt" />
+    <None Remove="Textfiles\Ending\WilbertWellFragment.txt" />
     <None Remove="Textfiles\Evalina\EvalinaDollFragment.txt" />
     <None Remove="Textfiles\Evalina\EvalinaDressFragment.txt" />
     <None Remove="Textfiles\Gillhardt\GillhardtJointDialogue.txt" />
@@ -56,6 +69,45 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Credits.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\EvalinaDollFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\EvalinaDressFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\GillhardtJointFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\GoldMemoryFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\GustofBreadFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\GustofMeatFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\SloanBellFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\SloanExplosionFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\TiaraMemoryFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\WilbertDynamiteFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\WilbertFireFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textfiles\Ending\WilbertWellFragment.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Textfiles\Evalina\EvalinaDollDialogue.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
