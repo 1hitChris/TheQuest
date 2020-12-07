@@ -72,6 +72,22 @@ East: Well
 SouthEast: HouseEntrance
 Down: Mines
 
+ElevatorShaftNoLeft
+Name: Elevator Shaft
+Description: You're at a small elevator that leads down to the Mines and above the elevator you see a bell tied up by some rope. To the east is the well and southeast is the entrance to the house.
+Directions:
+East: Well
+SouthEast: HouseEntrance
+Down: MinesNoLeft
+
+ElevatorShaftNoRight
+Name: Elevator Shaft
+Description: You're at a small elevator that leads down to the Mines and above the elevator you see a bell tied up by some rope. To the east is the well and southeast is the entrance to the house.
+Directions:
+East: Well
+SouthEast: HouseEntrance
+Down: MinesNoRight
+
 Campfire
 Name: Campfire
 Description: You see a small campfire, probably used for family bbq's.

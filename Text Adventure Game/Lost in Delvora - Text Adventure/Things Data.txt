@@ -226,5 +226,5 @@ StartingLocation: Barn
 Sloan
 Name: Sloan
 Description: A teenage boy.
-StartingLocation: Field
+StartingLocation: Barn
 

@@ -23,6 +23,8 @@ namespace Lost_in_Delvora___Text_Adventure
         Field,
         Greenhouse,
         ElevatorShaft,
+        ElevatorShaftNoLeft,
+        ElevatorShaftNoRight,
         Mines,
         MinesNoRight,
         MinesNoLeft,
@@ -196,7 +198,7 @@ namespace Lost_in_Delvora___Text_Adventure
         };
         static ThingId[] ThingsYouCanGet = { ThingId.Knife, ThingId.Tiara, ThingId.Pickaxe, ThingId.Dynamite, ThingId.GoldOre, ThingId.Key, ThingId.LunerasMemoryFragment, ThingId.Tools, 
         ThingId.Dress, ThingId.Wheat, ThingId.Weeds, ThingId.Bell, ThingId.Shirt, ThingId.Cloth, ThingId.Thread, ThingId.Bundle, ThingId.Dough, ThingId.Doll, ThingId.Bread, ThingId.Meat, 
-        ThingId.CookedMeat, ThingId.Book, ThingId.Herbs, ThingId.Joint, ThingId.Potion, ThingId.LunerasMemoryFragment, ThingId.PapasMemoryFragment, ThingId.WilbertsMemoryFragment, ThingId.EvalinasMemoryFragment,
+        ThingId.CookedMeat, ThingId.Book, ThingId.Herbs, ThingId.Joint, ThingId.Potion, ThingId.Water, ThingId.LunerasMemoryFragment, ThingId.PapasMemoryFragment, ThingId.WilbertsMemoryFragment, ThingId.EvalinasMemoryFragment,
         ThingId.GillhardtsMemoryFragment, ThingId.GustofsMemoryFragment, ThingId.SloansMemoryFragment};
         static ThingId[] ThingsYouCanTalkTo = { ThingId.Papa, ThingId.Lunera, ThingId.Wilbert, ThingId.Evalina, ThingId.Gillhardt, ThingId.Gustof, ThingId.Sloan };
         static ThingId[] ThingsYouCanUse = { ThingId.Key, ThingId.FireStarter, ThingId.Dynamite, ThingId.LitDynamite, ThingId.Pickaxe, ThingId.Cloth, ThingId.Shirt, ThingId.Bundle,
@@ -212,7 +214,7 @@ namespace Lost_in_Delvora___Text_Adventure
             ReadDataFiles();
             InitializeState();
             Console.ForegroundColor = NarrativeColor;
-            Intro();
+            //Intro();
             DisplayLocation();
             while (!quitGame)
             {
@@ -676,7 +678,7 @@ namespace Lost_in_Delvora___Text_Adventure
                     HandleUse(thingIdsFromCommand);
                     break;
 
-                case "drop item":
+                case "drop":
                 case "d":
                     HandleDrop(thingIdsFromCommand);
                     break;
@@ -1351,7 +1353,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 return;
             }
 
-            if (HaveThing(ThingId.Meat))
+            if (HaveThing(ThingId.CookedMeat))
             {
                 Console.Clear();
                 string dialogueMeat = File.ReadAllText("Textfiles/Gustof/GustofMeatDialogue.txt");
@@ -1450,6 +1452,7 @@ namespace Lost_in_Delvora___Text_Adventure
                     Print($"You unlocked the chest and found a {ThingId.Tiara}. When you lift up the tiara, you hear a clicking sound and the entire room starts to rumble, after a breif moment it stops.");
                     GetThing(ThingId.Tiara);
                     LocationsData[LocationId.LeftTunnel].Directions[Direction.Back] = LocationId.MinesNoRight;
+                    LocationsData[LocationId.MinesNoRight].Directions[Direction.Up] = LocationId.ElevatorShaftNoRight;
                     break;
 
                 case ThingId.Lunera:
@@ -1543,14 +1546,16 @@ namespace Lost_in_Delvora___Text_Adventure
                     GetThing(ThingId.Tiara);
                     MoveThing(ThingId.LitDynamite, LocationId.Nowhere);
                     LocationsData[LocationId.LeftTunnel].Directions[Direction.Back] = LocationId.MinesNoRight;
+                    LocationsData[LocationId.MinesNoRight].Directions[Direction.Up] = LocationId.ElevatorShaftNoRight;
                     break;
 
                 case ThingId.GoldDeposit:
                     Console.Clear();
                     Print("You run away fast and after a couple of seconds the dynamite blows up, leaving only pieces of rocks and gold ore scattered.");
-                    GetThing(ThingId.Tiara);
+                    GetThing(ThingId.GoldOre);
                     MoveThing(ThingId.LitDynamite, LocationId.Nowhere);
                     LocationsData[LocationId.RightTunnel].Directions[Direction.Back] = LocationId.MinesNoLeft;
+                    LocationsData[LocationId.MinesNoLeft].Directions[Direction.Up] = LocationId.ElevatorShaftNoLeft;
                     break;
 
                 case ThingId.Tools:
@@ -1603,6 +1608,7 @@ namespace Lost_in_Delvora___Text_Adventure
                     GetThing(ThingId.GoldOre);
                     MoveThing(ThingId.Pickaxe, LocationId.Nowhere);
                     LocationsData[LocationId.RightTunnel].Directions[Direction.Back] = LocationId.MinesNoLeft;
+                    LocationsData[LocationId.MinesNoLeft].Directions[Direction.Up] = LocationId.ElevatorShaftNoLeft;
                     break;
 
                 default:
@@ -1772,7 +1778,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 case ThingId.Wheat:
                     Console.Clear();
                     Print("You made a ball of dough");
-                    GetThing(ThingId.Potion);
+                    GetThing(ThingId.Dough);
                     MoveThing(ThingId.Water, LocationId.Nowhere);
                     MoveThing(ThingId.Wheat, LocationId.Nowhere);
                     break;
@@ -1780,7 +1786,7 @@ namespace Lost_in_Delvora___Text_Adventure
                 case ThingId.Herbs:
                     Console.Clear();
                     Print("You made a sleeping potion");
-                    GetThing(ThingId.Dough);
+                    GetThing(ThingId.Potion);
                     MoveThing(ThingId.Water, LocationId.Nowhere);
                     MoveThing(ThingId.Herbs, LocationId.Nowhere);
                     break;
