@@ -9,6 +9,7 @@ namespace Full_bowling_score_sheet
     {
         static void Main(string[] args)
         {
+            #region Score Calculator
             var roll = new Random();
             // Creating one jagged array with 10 arrays.
             var rolls = new int[10][];
@@ -319,11 +320,9 @@ namespace Full_bowling_score_sheet
                     Console.WriteLine();
                 }
             }
+            #endregion
 
-            DrawScoreboard();
-        }
-        static void DrawScoreboard()
-        {
+            #region Border
             // Draw top border
             Console.Write("┌─┬─┬─");
             for (int frameIndex = 1; frameIndex < 10; frameIndex++)
@@ -337,8 +336,8 @@ namespace Full_bowling_score_sheet
             Console.Write("|");
             for (int frameIndex = 1; frameIndex < 10; frameIndex++)
             {
-                Console.Write(" | | |");
-                if (frameIndex == 9) Console.Write(" │ │ │ ");
+                Console.Write($" |{rolls[frameIndex - 1][0]}|{rolls[frameIndex - 1][1]}|");
+                if (frameIndex == 9) Console.Write($" │{rolls[9][0]}│{rolls[9][1]}│ ");
             }
             Console.WriteLine("|");
 
@@ -366,6 +365,7 @@ namespace Full_bowling_score_sheet
                 if (frameIndex == 9) Console.Write("──");
             }
             Console.WriteLine("┘");
+            #endregion
         }
     }
 }

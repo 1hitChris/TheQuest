@@ -214,7 +214,7 @@ namespace Lost_in_Delvora___Text_Adventure
             ReadDataFiles();
             InitializeState();
             Console.ForegroundColor = NarrativeColor;
-            //Intro();
+            Intro();
             DisplayLocation();
             while (!quitGame)
             {
