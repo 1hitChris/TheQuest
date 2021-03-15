@@ -11,78 +11,68 @@ namespace Dice_simulator_tool
         {
             Roll();
         }
-
+        //Roll main method
         static void Roll()
         {
-            Console.WriteLine("DICE SIMULATOR");
-            Console.WriteLine("\nEnter desired dice roll in standard dice notation: ");
-            while (true)
+            bool repeatRoll = false;
+            bool newRoll = false;
+            bool quit = false;
+            do
             {
+                newRoll = false;
+                Console.WriteLine("DICE SIMULATOR");
+                Console.WriteLine("\nEnter desired dice roll in standard dice notation: ");
+                   
                 string diceNotation = Console.ReadLine();
-                var listOfRolls = new List<int> { };
-                int numberOfThrows = 3;
-                var listOfString = new List<string> { "1st", "2nd", "3rd" };
-
-                if (IsStandardDiceNotation(diceNotation))
+                // var listOfRolls = new List<int> { };
+                // int numberOfThrows = 1;
+                do
                 {
-                    Console.WriteLine("\nSimulating...\n");
-
-                    for (int throws = 0; throws < numberOfThrows; throws++)
+                    repeatRoll = false;
+                    if (IsStandardDiceNotation(diceNotation))
                     {
-                        listOfRolls.Add(DiceRoll(diceNotation));
-                    }
-
-                   /* for (int i = 0; i < listOfRolls.Count; i++)
-                    {
-                        Console.WriteLine($"{listOfString[i]} roll is: {listOfRolls[i]}");
-                    }
-                   */
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"\nYou rolled {listOfRolls[0] + listOfRolls[1] + listOfRolls[2]}.");
-
-                }
-                else
-                {
-                    Console.WriteLine($"You did not use a standard dice notation. Try again: ");
-                }
-
-                Console.WriteLine("Do you want to (r)epeat, enter a (n)ew roll or (q)uit?");
-
-                var key = Console.ReadKey();
-                switch (key.Key)
-                {
-                    case ConsoleKey.R:
-                        listOfRolls.Clear();
-                        for (int throws = 0; throws < numberOfThrows; throws++)
-                        {
-                            listOfRolls.Add(DiceRoll(diceNotation));
-                        }
-
                         Console.WriteLine("\nSimulating...\n");
 
-                       /* for (int i = 0; i < listOfRolls.Count; i++)
-                        {
-                            Console.WriteLine($"{listOfString[i]} roll is: {listOfRolls[i]}");
-                        }*/
+                        DiceRollNotation(diceNotation);
 
-                        Console.WriteLine($"\nYou rolled {listOfRolls[0] + listOfRolls[1] + listOfRolls[2]}.");
-                        Console.WriteLine("Do you want to (r)epeat, enter a (n)ew roll or (q)uit?");
-                        break;
+                        /* Console.ForegroundColor = ConsoleColor.White;
+                         Console.WriteLine($"\nYou rolled {listOfRolls[0]}.");*/
 
-                    case ConsoleKey.N:
-                        Console.WriteLine("\n");
-                        Roll();
-                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"\nYou did not use a standard dice notation. Try again: ");
+                    }
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nDo you want to (r)epeat, enter a (n)ew roll or (q)uit?");
+                    Console.ForegroundColor = ConsoleColor.Gray;
 
-                    case ConsoleKey.Q:
-                        return;
+                    //Switch case for what wanna do, R for repeat, N for new roll and Q for quit
+                    var key = Console.ReadKey();
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.R:
+                            repeatRoll = true;
+                            Console.Clear();
+                            break;
 
-                    default:
-                        break;
-                }
-            }
+                        case ConsoleKey.N:
+                            newRoll = true;
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+
+                        case ConsoleKey.Q:
+                            return;
+                    }
+
+                } while (repeatRoll == true);
+
+            } while (newRoll == true);
+
+
         }
-
+        //The dice roll method. Takes in how many rolls, how many sides a dice have as well as fixed bonus
         static int DiceRoll(int numberOfRolls, int diceSides, int fixedBonus = 0)
         {
             var random = new Random();
@@ -97,8 +87,8 @@ namespace Dice_simulator_tool
 
             return sum + fixedBonus;
         }
-
-        static int DiceRoll(string diceNotation)
+        //Takes the dicenotation and use split on "d, + and -" and parse fixed bonus
+        static int DiceRollNotation(string diceNotation)
         {
             string[] valuesOfDiceNotation = diceNotation.Split('d', '+', '-');
 
@@ -127,12 +117,12 @@ namespace Dice_simulator_tool
 
             return DiceRoll(numberOfRolls, diceSides, bonus);
         }
-
+        //Checks the string/readline to see if it matches the dice notation and becomes true if it does
         static bool IsStandardDiceNotation(string text)
         {
             bool diceNotation = false;
 
-            string notationRegex = "^\\d*d\\d+[+-]?\\d*$";
+            string notationRegex = @"^\d*d\d+[+-]?\d*$";
             if (Regex.IsMatch(text, notationRegex))
             {
                 diceNotation = true;
@@ -141,6 +131,7 @@ namespace Dice_simulator_tool
             return diceNotation;
         }
 
+        //Checks how many sides the dice have and also the sum and picks out the right art
         static string DiceArt(int diceSides, int sum)
         {
             string errorMessage = "Try again";

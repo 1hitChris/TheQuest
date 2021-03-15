@@ -75,14 +75,16 @@ namespace Monster_Manual_with_search
 
                 MonsterData(monsterEntries);
                 ArmorData(armorTypeEntries);
-            retrySearchBy:
+
+                //Choose what you wanna search with, name or armor
                 Console.WriteLine("Do you want to search by (n)ame or (a)rmor?");
                 string searchBy = Console.ReadLine();
 
+                //If you press a, you search by name
                 if (searchBy == "n")
                 {
                     Console.Clear();
-                retrySearch:
+                
                     Console.WriteLine("Enter a query to search monsters by name:");
                     string search = Console.ReadLine();
 
@@ -93,7 +95,7 @@ namespace Monster_Manual_with_search
                         Console.WriteLine("\nNo monsters were found. Press any key to try again.");
                         Console.ReadKey();
                         Console.Clear();
-                        goto retrySearch;
+                        
                     }
 
                     else if (searchResults.Count == 1)
@@ -107,7 +109,7 @@ namespace Monster_Manual_with_search
                         MonsterInfo(monsterEntries, armorTypeEntries, result);
                     }
                 }
-
+                //If you press a, you search by armor
                 else if (searchBy == "a")
                 {
                     Console.WriteLine("\nWhich armor type do you want to display?");
@@ -119,7 +121,7 @@ namespace Monster_Manual_with_search
                     }
 
                     Console.WriteLine("\nEnter number:");
-                retryArmorNumber:
+                
                     int chosen;
                     try
                     {
@@ -128,7 +130,7 @@ namespace Monster_Manual_with_search
 
                         if (searchResults.Count == 0)
                         {
-                            goto retryArmorNumber;
+                            
                         }
 
                         else if (searchResults.Count == 1)
@@ -150,7 +152,6 @@ namespace Monster_Manual_with_search
                         Console.SetCursorPosition(0, Console.CursorTop - 1);
                         Console.Write(new String(' ', Console.WindowWidth));
                         Console.SetCursorPosition(0, cursor - 1);
-                        goto retryArmorNumber;
                     }
                 }
 
@@ -160,10 +161,10 @@ namespace Monster_Manual_with_search
                     Console.SetCursorPosition(0, Console.CursorTop - 1);
                     Console.Write(new String(' ', Console.WindowWidth));
                     Console.SetCursorPosition(0, cursor - 2);
-                    goto retrySearchBy;
+                    
                 }
 
-            askAgain:
+            
                 Console.WriteLine($"\nDo you want to search again? Y/N");
                 string again = Console.ReadLine().ToLower();
 
@@ -188,14 +189,14 @@ namespace Monster_Manual_with_search
                     Console.SetCursorPosition(0, Console.CursorTop - 1);
                     Console.Write(new String(' ', Console.WindowWidth));
                     Console.SetCursorPosition(0, cursor - 3);
-                    goto askAgain;
+                    
                 }
-
-            } while (searchAgain == true);
+            //Fix while loop here, tried and seems to be working with this
+            } while (true);
 
 
         }
-
+        //Search by name of monster
         static void nameSearch(List<MonsterEntry> monsterEntries, string search)
         {
             for (int i = 0; i < monsterEntries.Count; i++)
@@ -207,6 +208,7 @@ namespace Monster_Manual_with_search
             }
         }
 
+        //Search by armor of monster
         static void armorSearch(List<MonsterEntry> monsterEntries, string search)
         {
             for (int i = 0; i < monsterEntries.Count; i++)
@@ -219,6 +221,7 @@ namespace Monster_Manual_with_search
 
         }
 
+        //Result of the search, able to chose a number if more than one option in the search
         static string SearchResult()
         {
             Console.WriteLine("\nWhich monster did you want to look up?");
@@ -227,22 +230,13 @@ namespace Monster_Manual_with_search
                 Console.WriteLine($"{i + 1}: {searchResults[i]}");
             }
             Console.WriteLine("\nEnter number:");
-        retryNumber:
+     
             int chosen;
-            try
-            {
+            
                 chosen = Int32.Parse(Console.ReadLine()) - 1;
                 return searchResults[chosen];
-            }
 
-            catch
-            {
-                int cursor = Console.CursorTop;
-                Console.SetCursorPosition(0, Console.CursorTop - 1);
-                Console.Write(new string(' ', Console.WindowWidth));
-                Console.SetCursorPosition(0, cursor - 1);
-                goto retryNumber;
-            }
+         // Display the monsters name, description, alignment, hitpoints and armor class and type
         }
         static void MonsterInfo(List<MonsterEntry> monsterEntries, Dictionary<ArmorType, ArmorTypeEntry> armorTypeEntries, string result)
         {
@@ -288,6 +282,7 @@ namespace Monster_Manual_with_search
             }
         }
 
+        //All the monster data from the monster manual. Name, description, alignment, hitpoints and armor
         static void MonsterData(List<MonsterEntry> monsterEntries)
         {
             for (int i = 0; i < monster.Length; i++)
@@ -360,6 +355,8 @@ namespace Monster_Manual_with_search
                 monsterEntries.Add(monsterEntry);
             }
         }
+
+        //Dictionary with all the different armor typings
         static void ArmorData(Dictionary<ArmorType, ArmorTypeEntry> armorTypeEntries)
         {
 
