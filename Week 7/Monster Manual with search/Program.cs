@@ -17,7 +17,7 @@ namespace Monster_Manual_with_search
     class ArmorInformation
     {
         public int Class;
-        public string Type;
+        public ArmorType Type;
     }
 
     enum ArmorType
@@ -49,242 +49,217 @@ namespace Monster_Manual_with_search
     }
     class Program
     {
-        // Read from the monster manual
-        static string manual = File.ReadAllText("Monster Manual.txt");
-
-        // Split the manual into individual monsters
-        static String[] monster = manual.Split("\n\n");
-
-        // Read from the armor type
-        static string pathArmor = "Armor Types.txt";
-        static string armors = File.ReadAllText(pathArmor);
-
-        // Split armors into individuals
-        static String[] armor = armors.Split("\n");
-
-        // List for matching search result
-        static List<string> searchResults = new List<string>();
+        static List<MonsterEntry> monsterEntries = new List<MonsterEntry>();
+        static Dictionary<ArmorType, ArmorTypeEntry> armorTypeEntries = new Dictionary<ArmorType, ArmorTypeEntry>();
 
         static void Main(string[] args)
         {
-            bool searchAgain;
+            //Initialize all data
+            ParseMonsterData();
+            ParseArmorData();
+
+            bool searchAgain = false;
+
             do
             {
-                var monsterEntries = new List<MonsterEntry>();
-                var armorTypeEntries = new Dictionary<ArmorType, ArmorTypeEntry>();
+                bool skipListIfOneMonster = false;
 
-                MonsterData(monsterEntries);
-                ArmorData(armorTypeEntries);
+                List<MonsterEntry> matchedMonsterEntries;
 
                 //Choose what you wanna search with, name or armor
                 Console.WriteLine("Do you want to search by (n)ame or (a)rmor?");
                 string searchBy = Console.ReadLine();
 
-                //If you press a, you search by name
+                //If you press n, you search by name
                 if (searchBy == "n")
                 {
+                    skipListIfOneMonster = true;
                     Console.Clear();
-                
-                    Console.WriteLine("Enter a query to search monsters by name:");
-                    string search = Console.ReadLine();
 
-                    nameSearch(monsterEntries, search);
-
-                    if (searchResults.Count == 0)
+                    do
                     {
-                        Console.WriteLine("\nNo monsters were found. Press any key to try again.");
-                        Console.ReadKey();
-                        Console.Clear();
-                        
-                    }
+                        Console.WriteLine("Enter a query to search monsters by name:");
+                        string search = Console.ReadLine();
 
-                    else if (searchResults.Count == 1)
-                    {
-                        MonsterInfo(monsterEntries, armorTypeEntries, searchResults[0]);
-                    }
+                        matchedMonsterEntries = FindMonstersByName(search);
 
-                    else
-                    {
-                        string result = SearchResult();
-                        MonsterInfo(monsterEntries, armorTypeEntries, result);
-                    }
+                        if (matchedMonsterEntries.Count == 0)
+                        {
+                            Console.WriteLine("\nNo monsters were found. Press any key to try again.");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            break;
+                        }
+
+                    } while (true);
                 }
                 //If you press a, you search by armor
                 else if (searchBy == "a")
                 {
                     Console.WriteLine("\nWhich armor type do you want to display?");
-                    string[] armorTypes = Enum.GetNames(typeof(ArmorType));
+
+                    ArmorType[] armorTypes = (ArmorType[])Enum.GetValues(typeof(ArmorType));
 
                     for (int i = 0; i < armorTypes.Length; i++)
                     {
-                        Console.WriteLine($"{i + 1}: {armorTypes[i]}");
+                        if (armorTypeEntries.ContainsKey(armorTypes[i]))
+                        {
+                            Console.WriteLine($"{i + 1}: {armorTypeEntries[armorTypes[i]].Name}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{i + 1}: {armorTypes[i]}");
+                        }
+                       
                     }
 
                     Console.WriteLine("\nEnter number:");
-                
-                    int chosen;
-                    try
+
+                    int chosenArmorTypeIndex = Int32.Parse(Console.ReadLine()) - 1;
+                    ArmorType chosenArmorType = armorTypes[chosenArmorTypeIndex];
+
+                    matchedMonsterEntries = FindMonstersByArmorType(chosenArmorType);
+                }
+                else
+                {
+                    continue;
+                }
+
+                MonsterEntry chosenMonsterEntry;
+                if (skipListIfOneMonster && matchedMonsterEntries.Count == 1)
+                {
+                    chosenMonsterEntry = matchedMonsterEntries[0];
+                }
+                else
+                {
+                    //Let user choose a matched monster
+                    chosenMonsterEntry = ChooseMonsterFromList(matchedMonsterEntries);
+                }
+
+                // Display chosen monster
+                DisplayMonsterInfo(chosenMonsterEntry);
+
+                // Ask to search again
+                Console.WriteLine($"\nDo you want to search again? Y/N");
+
+                do
+                {
+                    string again = Console.ReadLine().ToLower();
+
+                    if (again == "y" || again == "n")
                     {
-                        chosen = Int32.Parse(Console.ReadLine()) - 1;
-                        armorSearch(monsterEntries, armorTypes[chosen]);
-
-                        if (searchResults.Count == 0)
+                        if (again == "y")
                         {
-                            
-                        }
-
-                        else if (searchResults.Count == 1)
-                        {
-                            MonsterInfo(monsterEntries, armorTypeEntries, searchResults[0]);
+                            searchAgain = true;
+                            Console.Clear();
                         }
 
                         else
                         {
-                            string result = SearchResult();
-                            MonsterInfo(monsterEntries, armorTypeEntries, result);
+                            searchAgain = false;
                         }
 
+                        break;
                     }
 
-                    catch
+                    else
                     {
                         int cursor = Console.CursorTop;
                         Console.SetCursorPosition(0, Console.CursorTop - 1);
                         Console.Write(new String(' ', Console.WindowWidth));
                         Console.SetCursorPosition(0, cursor - 1);
                     }
-                }
+                } while (true);
 
-                else
-                {
-                    int cursor = Console.CursorTop;
-                    Console.SetCursorPosition(0, Console.CursorTop - 1);
-                    Console.Write(new String(' ', Console.WindowWidth));
-                    Console.SetCursorPosition(0, cursor - 2);
-                    
-                }
-
-            
-                Console.WriteLine($"\nDo you want to search again? Y/N");
-                string again = Console.ReadLine().ToLower();
-
-                if (again == "y" || again == "n")
-                {
-                    if (again == "y")
-                    {
-                        searchAgain = true;
-                        searchResults.Clear();
-                        Console.Clear();
-                    }
-
-                    else
-                    {
-                        searchAgain = false;
-                    }
-                }
-
-                else
-                {
-                    int cursor = Console.CursorTop;
-                    Console.SetCursorPosition(0, Console.CursorTop - 1);
-                    Console.Write(new String(' ', Console.WindowWidth));
-                    Console.SetCursorPosition(0, cursor - 3);
-                    
-                }
-            //Fix while loop here, tried and seems to be working with this
-            } while (true);
-
+            } while (searchAgain);
 
         }
+
         //Search by name of monster
-        static void nameSearch(List<MonsterEntry> monsterEntries, string search)
+        static List<MonsterEntry> FindMonstersByName(string search)
         {
-            for (int i = 0; i < monsterEntries.Count; i++)
+            var searchResults = new List<MonsterEntry>();
+
+            foreach (MonsterEntry monsterEntry in monsterEntries)
             {
-                if (Regex.IsMatch(monsterEntries[i].Name, $"({search} ?)", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(monsterEntry.Name, $"({search} ?)", RegexOptions.IgnoreCase))
                 {
-                    searchResults.Add(monsterEntries[i].Name);
+                    searchResults.Add(monsterEntry);
                 }
             }
+
+            return searchResults;
         }
 
         //Search by armor of monster
-        static void armorSearch(List<MonsterEntry> monsterEntries, string search)
+        static List<MonsterEntry> FindMonstersByArmorType(ArmorType armorType)
         {
-            for (int i = 0; i < monsterEntries.Count; i++)
+            var searchResults = new List<MonsterEntry>();
+
+            foreach (MonsterEntry monsterEntry in monsterEntries)
             {
-                if (Regex.IsMatch(monsterEntries[i].Name, $"({search} ?)", RegexOptions.IgnoreCase))
+                if (monsterEntry.Armor.Type == armorType)
                 {
-                    searchResults.Add(monsterEntries[i].Name);
+                    searchResults.Add(monsterEntry);
                 }
             }
 
+            return searchResults;
         }
 
         //Result of the search, able to chose a number if more than one option in the search
-        static string SearchResult()
+        static MonsterEntry ChooseMonsterFromList(List<MonsterEntry> monsterEntries)
         {
             Console.WriteLine("\nWhich monster did you want to look up?");
-            for (int i = 0; i < searchResults.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}: {searchResults[i]}");
-            }
-            Console.WriteLine("\nEnter number:");
-     
-            int chosen;
-            
-                chosen = Int32.Parse(Console.ReadLine()) - 1;
-                return searchResults[chosen];
 
-         // Display the monsters name, description, alignment, hitpoints and armor class and type
-        }
-        static void MonsterInfo(List<MonsterEntry> monsterEntries, Dictionary<ArmorType, ArmorTypeEntry> armorTypeEntries, string result)
-        {
-            int index = -1;
             for (int i = 0; i < monsterEntries.Count; i++)
             {
-                if (Regex.IsMatch(monsterEntries[i].Name, $"(^{result}$)", RegexOptions.IgnoreCase))
-                {
-                    index = i;
-                    break;
-                }
+                Console.WriteLine($"{i + 1}: {monsterEntries[i].Name}");
             }
+            Console.WriteLine("\nEnter number:");
 
-            Console.WriteLine($"\nDisplaying information for {monsterEntries[index].Name}.\n");
-            Console.WriteLine($"Name: {monsterEntries[index].Name}");
-            Console.WriteLine($"Description: {monsterEntries[index].Description}");
-            Console.WriteLine($"Alignment: {monsterEntries[index].Alignment}");
-            Console.WriteLine($"Hit points: {monsterEntries[index].HitPoints}");
-            Console.WriteLine($"Armor class: {monsterEntries[index].Armor.Class}");
+            int chosenIndex;
 
-            if (monsterEntries[index].Armor.Type == ArmorType.Unspecified.ToString())
+            chosenIndex = Int32.Parse(Console.ReadLine()) - 1;
+            return monsterEntries[chosenIndex];
+        }
+
+        //Display the monsters name, description, alignment, hitpoints and armor class and type
+        static void DisplayMonsterInfo(MonsterEntry monsterEntry)
+        {
+            Console.WriteLine($"\nDisplaying information for {monsterEntry.Name}.\n");
+            Console.WriteLine($"Name: {monsterEntry.Name}");
+            Console.WriteLine($"Description: {monsterEntry.Description}");
+            Console.WriteLine($"Alignment: {monsterEntry.Alignment}");
+            Console.WriteLine($"Hit points: {monsterEntry.HitPoints}");
+            Console.WriteLine($"Armor class: {monsterEntry.Armor.Class}");
+
+            if (armorTypeEntries.ContainsKey(monsterEntry.Armor.Type))
             {
-                Console.WriteLine($"Armor type: {monsterEntries[index].Armor.Type}");
-            }
-
-            else if (monsterEntries[index].Armor.Type == ArmorType.Other.ToString())
-            {
-                Console.WriteLine($"Armor type: {monsterEntries[index].Armor.Type}");
-            }
-
-            else if (monsterEntries[index].Armor.Type == ArmorType.Natural.ToString())
-            {
-                Console.WriteLine($"Armor type: {monsterEntries[index].Armor.Type}");
-            }
-
-            else
-            {
-                ArmorTypeEntry armorTypeEntry = armorTypeEntries[Enum.Parse<ArmorType>(monsterEntries[index].Armor.Type)];
+                ArmorTypeEntry armorTypeEntry = armorTypeEntries[monsterEntry.Armor.Type];
 
                 Console.WriteLine($"Armor type: {armorTypeEntry.Name}");
                 Console.WriteLine($"Armor category: {armorTypeEntry.Category}");
                 Console.WriteLine($"Armor weight: {armorTypeEntry.Weight}");
             }
+            else
+            {
+                Console.WriteLine($"Armor type: {monsterEntry.Armor.Type}");
+            }
         }
 
         //All the monster data from the monster manual. Name, description, alignment, hitpoints and armor
-        static void MonsterData(List<MonsterEntry> monsterEntries)
+        static void ParseMonsterData()
         {
+            // Read from the monster manual
+            string manual = File.ReadAllText("Monster Manual.txt");
+
+            // Split the manual into individual monsters
+            String[] monster = manual.Split("\n\n");
+
             for (int i = 0; i < monster.Length; i++)
             {
                 var monsterEntry = new MonsterEntry();
@@ -295,61 +270,65 @@ namespace Monster_Manual_with_search
                 monsterEntry.Description = description[0];
                 monsterEntry.Alignment = description[1];
 
-                string diceNotation = @"\d+ \(\d+\w\d+(\+\d+\)|\))";
-                monsterEntry.HitPoints = Regex.Match(monster[i], diceNotation).ToString();
+                Match hitPoints = Regex.Match(info[2], @"Hit Points: (\d+ \S*)");
+                monsterEntry.HitPoints = hitPoints.Groups[1].Value;
 
                 Match armorClass = Regex.Match(info[3], @" (\d+)");
-                monsterEntry.Armor.Class = Int32.Parse(armorClass.Groups[1].ToString());
+                monsterEntry.Armor.Class = Int32.Parse(armorClass.Groups[1].Value);
 
-                Match armorType = Regex.Match(info[3], @" \(+(.+)\)+");
+                Match armorType = Regex.Match(info[3], @"\((.*?)(,.*)?\)");
 
-                if (Regex.IsMatch(info[3], @" \(+(.+)\)+"))
+                if (armorType.Success)
                 {
 
                     if (Regex.IsMatch(armorType.Groups[1].ToString(), "Natural", RegexOptions.IgnoreCase))
                     {
-                        monsterEntry.Armor.Type = ArmorType.Natural.ToString();
+                        monsterEntry.Armor.Type = ArmorType.Natural;
                     }
 
-                    else if (Regex.IsMatch(armorType.Groups[1].ToString(), "Studded Armor", RegexOptions.IgnoreCase))
+                    else if (Regex.IsMatch(armorType.Groups[1].ToString(), "Studded", RegexOptions.IgnoreCase))
                     {
-                        monsterEntry.Armor.Type = ArmorType.StuddedLeather.ToString();
+                        monsterEntry.Armor.Type = ArmorType.StuddedLeather;
                     }
 
                     else if (Regex.IsMatch(armorType.Groups[1].ToString(), "Leather", RegexOptions.IgnoreCase))
                     {
-                        monsterEntry.Armor.Type = ArmorType.Leather.ToString();
+                        monsterEntry.Armor.Type = ArmorType.Leather;
                     }
 
                     else if (Regex.IsMatch(armorType.Groups[1].ToString(), "Hide", RegexOptions.IgnoreCase))
                     {
-                        monsterEntry.Armor.Type = ArmorType.Hide.ToString();
+                        monsterEntry.Armor.Type = ArmorType.Hide;
                     }
 
                     else if (Regex.IsMatch(armorType.Groups[1].ToString(), "Chain Shirt", RegexOptions.IgnoreCase))
                     {
-                        monsterEntry.Armor.Type = ArmorType.ChainShirt.ToString();
+                        monsterEntry.Armor.Type = ArmorType.ChainShirt;
                     }
 
                     else if (Regex.IsMatch(armorType.Groups[1].ToString(), "Chain Mail", RegexOptions.IgnoreCase))
                     {
-                        monsterEntry.Armor.Type = ArmorType.ChainMail.ToString();
+                        monsterEntry.Armor.Type = ArmorType.ChainMail;
+                    }
+                    else if (Regex.IsMatch(armorType.Groups[1].ToString(), "Scale", RegexOptions.IgnoreCase))
+                    {
+                        monsterEntry.Armor.Type = ArmorType.ScaleMail;
                     }
 
                     else if (Regex.IsMatch(armorType.Groups[1].ToString(), "Plate", RegexOptions.IgnoreCase))
                     {
-                        monsterEntry.Armor.Type = ArmorType.Plate.ToString();
+                        monsterEntry.Armor.Type = ArmorType.Plate;
                     }
 
                     else
                     {
-                        monsterEntry.Armor.Type = ArmorType.Other.ToString();
+                        monsterEntry.Armor.Type = ArmorType.Other;
                     }
                 }
 
                 else
                 {
-                    monsterEntry.Armor.Type = ArmorType.Unspecified.ToString();
+                    monsterEntry.Armor.Type = ArmorType.Unspecified;
                 }
 
                 monsterEntries.Add(monsterEntry);
@@ -357,8 +336,14 @@ namespace Monster_Manual_with_search
         }
 
         //Dictionary with all the different armor typings
-        static void ArmorData(Dictionary<ArmorType, ArmorTypeEntry> armorTypeEntries)
+        static void ParseArmorData()
         {
+            // Read from the armor type
+            string pathArmor = "Armor Types.txt";
+            string armors = File.ReadAllText(pathArmor);
+
+            // Split armors into individuals
+            String[] armor = armors.Split("\n");
 
             string[] armorTypes = Enum.GetNames(typeof(ArmorType));
 
@@ -413,5 +398,3 @@ namespace Monster_Manual_with_search
 
     }
 }
-
-
